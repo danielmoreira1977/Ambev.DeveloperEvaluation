@@ -1,6 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 	<PropertyGroup>
-		<TargetFramework>net8.0</TargetFramework>
+		<TargetFramework>net9.0</TargetFramework>
 		<ImplicitUsings>enable</ImplicitUsings>
 		<Nullable>enable</Nullable>
 	</PropertyGroup>
@@ -10,12 +10,13 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer"  />
-		<PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions"  />
-		<PackageReference Include="Microsoft.Extensions.Diagnostics.HealthChecks"  />
+		<PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" />
+		<PackageReference Include="Microsoft.Extensions.Caching.Memory" />
+		<PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" />
+		<PackageReference Include="Microsoft.Extensions.Diagnostics.HealthChecks" />
 		<PackageReference Include="BCrypt.Net-Next" />
-		<PackageReference Include="FluentValidation"  />
-		<PackageReference Include="MediatR"  />
+		<PackageReference Include="FluentValidation" />
+		<PackageReference Include="MediatR" />
 		<PackageReference Include="Serilog.AspNetCore" />
 		<PackageReference Include="Serilog.Exceptions" />
 		<PackageReference Include="Serilog.Exceptions.EntityFrameworkCore" />
