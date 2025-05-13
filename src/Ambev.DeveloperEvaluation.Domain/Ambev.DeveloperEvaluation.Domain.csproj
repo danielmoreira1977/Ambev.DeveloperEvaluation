@@ -1,25 +1,18 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
   <PropertyGroup>
     <TargetFramework>net9.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
-  <ItemGroup>
-    <Folder Include="Enums\" />
-    <Folder Include="Exceptions\" />
-    <Folder Include="Repositories\" />
-    <Folder Include="Events\" />
-    <Folder Include="ValueObjects\" />
-  </ItemGroup>
+	<ItemGroup>
+		<PackageReference Include="FluentValidation" />
+		<PackageReference Include="Microsoft.Extensions.Caching.Memory" />
+	</ItemGroup>
 
-  <ItemGroup>
-    <PackageReference Include="FluentValidation" />
-    <PackageReference Include="Microsoft.Extensions.Caching.Memory" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\Ambev.DeveloperEvaluation.Common\Ambev.DeveloperEvaluation.Common.csproj" />
-  </ItemGroup>
-
+	<ItemGroup>
+	  <ProjectReference Include="..\Ambev.DeveloperEvaluation.Common\Ambev.DeveloperEvaluation.Common.csproj" />
+	</ItemGroup>
+	
 </Project>
