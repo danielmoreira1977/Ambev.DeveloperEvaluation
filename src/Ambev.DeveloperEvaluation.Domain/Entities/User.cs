@@ -1,7 +1,6 @@
 using Ambev.DeveloperEvaluation.Common.Primitives;
 using Ambev.DeveloperEvaluation.Common.Security;
 using Ambev.DeveloperEvaluation.Common.Validation;
-using Ambev.DeveloperEvaluation.Domain.Common;
 using Ambev.DeveloperEvaluation.Domain.Enums;
 using Ambev.DeveloperEvaluation.Domain.Validation;
 
@@ -11,7 +10,7 @@ namespace Ambev.DeveloperEvaluation.Domain.Entities;
 /// Represents a user in the system with authentication and profile information. This entity follows
 /// domain-driven design principles and includes business rules validation.
 /// </summary>
-public class User : BaseEntity<UserId>, IUser
+public class User : AggregateRoot<UserId>, IUser
 {
     /// <summary>
     /// Initializes a new instance of the User class.
