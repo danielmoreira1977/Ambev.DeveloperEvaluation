@@ -1,0 +1,10 @@
+@Ambev.DeveloperEvaluation.WebApi_HostAddress = https://localhost:7057
+
+GET {{Ambev.DeveloperEvaluation.WebApi_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
+
+GET {{Ambev.DeveloperEvaluation.WebApi_HostAddress}}/authentication
+
+###
