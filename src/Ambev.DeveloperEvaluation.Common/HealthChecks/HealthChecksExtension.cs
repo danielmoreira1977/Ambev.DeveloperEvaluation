@@ -12,23 +12,30 @@ namespace Ambev.DeveloperEvaluation.Common.HealthChecks;
 /// Provides extension methods for configuring health checks in an ASP.NET Core application.
 /// </summary>
 /// <remarks>
-/// This class contains methods for both adding health checks to the service collection
-/// and configuring health check endpoints in the application pipeline.
+/// This class contains methods for both adding health checks to the service collection and
+/// configuring health check endpoints in the application pipeline.
 /// </remarks>
 public static class HealthChecksExtension
 {
     /// <summary>
-    /// Adds basic health checks to the <see cref="HealthCheckService"/> in the application's service collection.
+    /// Adds basic health checks to the <see cref="HealthCheckService"/> in the application's
+    /// service collection.
     /// </summary>
-    /// <param name="builder">The <see cref="WebApplicationBuilder"/> to add the health checks to.</param>
+    /// <param name="builder">
+    /// The <see cref="WebApplicationBuilder"/> to add the health checks to.
+    /// </param>
     /// <remarks>
     /// This method adds two basic health checks:
     /// <list type="bullet">
     /// <item>
-    /// <description>"Liveness": A simple check that always returns healthy, tagged with "liveness".</description>
+    /// <description>
+    /// "Liveness": A simple check that always returns healthy, tagged with "liveness".
+    /// </description>
     /// </item>
     /// <item>
-    /// <description>"Readiness": A simple check that always returns healthy, tagged with "readiness".</description>
+    /// <description>
+    /// "Readiness": A simple check that always returns healthy, tagged with "readiness".
+    /// </description>
     /// </item>
     /// </list>
     /// These checks can be used to verify the basic operational status of the application.
@@ -36,8 +43,8 @@ public static class HealthChecksExtension
     /// <example>
     /// This method can be used in Program.cs:
     /// <code>
-    /// var builder = WebApplication.CreateBuilder(args);
-    /// builder.AddBasicHealthChecks();
+    ///var builder = WebApplication.CreateBuilder(args);
+    ///builder.AddBasicHealthChecks();
     /// </code>
     /// </example>
     public static void AddBasicHealthChecks(this WebApplicationBuilder builder)
@@ -69,7 +76,7 @@ public static class HealthChecksExtension
     /// <example>
     /// This method can be used in the Configure method of Startup.cs or in Program.cs:
     /// <code>
-    /// app.UseBasicHealthChecks();
+    ///app.UseBasicHealthChecks();
     /// </code>
     /// </example>
     public static void UseBasicHealthChecks(this WebApplication app)

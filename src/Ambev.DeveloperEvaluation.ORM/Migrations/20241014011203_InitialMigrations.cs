@@ -1,14 +1,20 @@
-﻿using System;
-using Microsoft.EntityFrameworkCore.Migrations;
+﻿using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
 namespace Ambev.DeveloperEvaluation.ORM.Migrations
 {
-    /// <inheritdoc />
+    /// <inheritdoc/>
     public partial class InitialMigrations : Migration
     {
-        /// <inheritdoc />
+        /// <inheritdoc/>
+        protected override void Down(MigrationBuilder migrationBuilder)
+        {
+            migrationBuilder.DropTable(
+                name: "Users");
+        }
+
+        /// <inheritdoc/>
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
@@ -27,13 +33,6 @@ namespace Ambev.DeveloperEvaluation.ORM.Migrations
                 {
                     table.PrimaryKey("PK_Users", x => x.Id);
                 });
-        }
-
-        /// <inheritdoc />
-        protected override void Down(MigrationBuilder migrationBuilder)
-        {
-            migrationBuilder.DropTable(
-                name: "Users");
         }
     }
 }

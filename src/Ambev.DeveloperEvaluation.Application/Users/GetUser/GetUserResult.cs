@@ -8,6 +8,11 @@ namespace Ambev.DeveloperEvaluation.Application.Users.GetUser;
 public class GetUserResult
 {
     /// <summary>
+    /// The user's email address
+    /// </summary>
+    public string Email { get; set; } = string.Empty;
+
+    /// <summary>
     /// The unique identifier of the user
     /// </summary>
     public Guid Id { get; set; }
@@ -18,14 +23,9 @@ public class GetUserResult
     public string Name { get; set; } = string.Empty;
 
     /// <summary>
-    /// The user's email address
-    /// </summary>
-    public string Email { get; set; } = string.Empty;
-
-    /// <summary>
     /// The user's phone number
     /// </summary>
-    public string Phone { get; set; } = string.Empty;   
+    public string Phone { get; set; } = string.Empty;
 
     /// <summary>
     /// The user's role in the system

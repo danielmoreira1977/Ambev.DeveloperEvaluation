@@ -1,7 +1,7 @@
-using AutoMapper;
-using MediatR;
-using FluentValidation;
 using Ambev.DeveloperEvaluation.Domain.Repositories;
+using AutoMapper;
+using FluentValidation;
+using MediatR;
 
 namespace Ambev.DeveloperEvaluation.Application.Users.GetUser;
 
@@ -10,8 +10,8 @@ namespace Ambev.DeveloperEvaluation.Application.Users.GetUser;
 /// </summary>
 public class GetUserHandler : IRequestHandler<GetUserCommand, GetUserResult>
 {
-    private readonly IUserRepository _userRepository;
     private readonly IMapper _mapper;
+    private readonly IUserRepository _userRepository;
 
     /// <summary>
     /// Initializes a new instance of GetUserHandler

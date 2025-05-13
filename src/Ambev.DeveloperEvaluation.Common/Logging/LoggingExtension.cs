@@ -13,24 +13,24 @@ using System.Diagnostics;
 
 namespace Ambev.DeveloperEvaluation.Common.Logging;
 
-
-
-/// <summary> Add default Logging configuration to project. This configuration supports Serilog logs with DataDog compatible output.</summary>
+/// <summary>
+/// Add default Logging configuration to project. This configuration supports Serilog logs with
+/// DataDog compatible output.
+/// </summary>
 public static class LoggingExtension
 {
     /// <summary>
     /// The destructuring options builder configured with default destructurers and a custom DbUpdateExceptionDestructurer.
     /// </summary>
-    static readonly DestructuringOptionsBuilder _destructuringOptionsBuilder = new DestructuringOptionsBuilder()
+    private static readonly DestructuringOptionsBuilder _destructuringOptionsBuilder = new DestructuringOptionsBuilder()
         .WithDefaultDestructurers()
         .WithDestructurers([new DbUpdateExceptionDestructurer()]);
 
     /// <summary>
     /// A filter predicate to exclude log events with specific criteria.
     /// </summary>
-    static readonly Func<LogEvent, bool> _filterPredicate = exclusionPredicate =>
+    private static readonly Func<LogEvent, bool> _filterPredicate = exclusionPredicate =>
     {
-
         if (exclusionPredicate.Level != LogEventLevel.Information) return true;
 
         exclusionPredicate.Properties.TryGetValue("StatusCode", out var statusCode);
@@ -45,11 +45,13 @@ public static class LoggingExtension
     /// <summary>
     /// This method configures the logging with commonly used features for DataDog integration.
     /// </summary>
-    /// <param name="builder">The <see cref="WebApplicationBuilder" /> to add services to.</param>
-    /// <returns>A <see cref="WebApplicationBuilder"/> that can be used to further configure the API services.</returns>
+    /// <param name="builder">The <see cref="WebApplicationBuilder"/> to add services to.</param>
+    /// <returns>
+    /// A <see cref="WebApplicationBuilder"/> that can be used to further configure the API services.
+    /// </returns>
     /// <remarks>
     /// <para>Logging output are diferents on Debug and Release modes.</para>
-    /// </remarks> 
+    /// </remarks>
     public static WebApplicationBuilder AddDefaultLogging(this WebApplicationBuilder builder)
     {
         Log.Logger = new LoggerConfiguration().CreateLogger();
@@ -89,7 +91,9 @@ public static class LoggingExtension
         return builder;
     }
 
-    /// <summary>Adds middleware for Swagger documetation generation.</summary>
+    /// <summary>
+    /// Adds middleware for Swagger documetation generation.
+    /// </summary>
     /// <param name="app">The <see cref="WebApplication"/> instance this method extends.</param>
     /// <returns>The <see cref="WebApplication"/> for Swagger documentation.</returns>
     public static WebApplication UseDefaultLogging(this WebApplication app)
@@ -99,6 +103,5 @@ public static class LoggingExtension
         var mode = Debugger.IsAttached ? "Debug" : "Release";
         logger.LogInformation("Logging enabled for '{Application}' on '{Environment}' - Mode: {Mode}", app.Environment.ApplicationName, app.Environment.EnvironmentName, mode);
         return app;
-
     }
 }
