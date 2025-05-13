@@ -1,9 +1,12 @@
+using Ambev.DeveloperEvaluation.Common.Primitives;
+
 namespace Ambev.DeveloperEvaluation.Domain.Enums;
 
-public enum UserRole
+public class UserRole(int id, string name)
+    : Enumeration(id, name)
 {
-    None = 0,
-    Customer,
-    Manager,
-    Admin,
+    public static UserRole Admin = new(3, nameof(Admin));
+    public static UserRole Customer = new(1, nameof(Customer));
+    public static UserRole Manager = new(2, nameof(Manager));
+    public static UserRole None = new(1, nameof(None));
 }

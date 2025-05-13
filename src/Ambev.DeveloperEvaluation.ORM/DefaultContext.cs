@@ -1,5 +1,5 @@
 ﻿using Ambev.DeveloperEvaluation.Common.Primitives.Interfaces;
-using Ambev.DeveloperEvaluation.Domain.Entities;
+using Ambev.DeveloperEvaluation.Domain.Entities.Users;
 using Microsoft.EntityFrameworkCore;
 using System.Reflection;
 

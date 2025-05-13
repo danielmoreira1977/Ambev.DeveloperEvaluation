@@ -1,6 +1,6 @@
 ﻿using Ambev.DeveloperEvaluation.Common.Constants;
 using Ambev.DeveloperEvaluation.Common.Primitives;
-using Ambev.DeveloperEvaluation.Domain.Entities;
+using Ambev.DeveloperEvaluation.Domain.Entities.Users;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 

@@ -27,7 +27,9 @@ public class JwtTokenGenerator : IJwtTokenGenerator
     /// <summary>
     /// Generates a JWT token for a specific user.
     /// </summary>
-    /// <param name="user">User for whom the token will be generated.</param>
+    /// <param name="id">Id of User for whom the token will be generated.</param>
+    /// <param name="username">Username of User for whom the token will be generated.</param>
+    /// <param name="role">Role of User for whom the token will be generated.</param>
     /// <returns>Valid JWT token as string.</returns>
     /// <remarks>
     /// The generated token includes the following claims:
@@ -38,7 +40,7 @@ public class JwtTokenGenerator : IJwtTokenGenerator
     /// The token is valid for 8 hours from the moment of generation.
     /// </remarks>
     /// <exception cref="ArgumentNullException">Thrown when user or secret key is not provided.</exception>
-    public string GenerateToken(IUser user)
+    public string GenerateToken(Guid id, string username, string role)
     {
         //TODO use Secrets
 
@@ -47,9 +49,9 @@ public class JwtTokenGenerator : IJwtTokenGenerator
 
         var claims = new[]
         {
-           new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
-           new Claim(ClaimTypes.Name, user.Username.Value),
-           new Claim(ClaimTypes.Role, user.Role)
+           new Claim(ClaimTypes.NameIdentifier, id.ToString()),
+           new Claim(ClaimTypes.Name, username),
+           new Claim(ClaimTypes.Role, role)
        };
 
         var tokenDescriptor = new SecurityTokenDescriptor

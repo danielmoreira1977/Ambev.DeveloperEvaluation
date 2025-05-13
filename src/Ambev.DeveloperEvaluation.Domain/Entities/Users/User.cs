@@ -1,10 +1,9 @@
 using Ambev.DeveloperEvaluation.Common.Primitives;
-using Ambev.DeveloperEvaluation.Common.Security;
 using Ambev.DeveloperEvaluation.Common.Validation;
 using Ambev.DeveloperEvaluation.Domain.Enums;
 using Ambev.DeveloperEvaluation.Domain.Validation;
 
-namespace Ambev.DeveloperEvaluation.Domain.Entities;
+namespace Ambev.DeveloperEvaluation.Domain.Entities.Users;
 
 /// <summary>
 /// Represents a user in the system with authentication and profile information. This entity follows
@@ -13,12 +12,14 @@ namespace Ambev.DeveloperEvaluation.Domain.Entities;
 public class User : AggregateRoot<UserId>, IUser
 {
     /// <summary>
-    /// Initializes a new instance of the User class.
+    /// Used by Ef core.
     /// </summary>
-    public User()
+    protected User()
     {
         CreatedAt = DateTime.UtcNow;
     }
+
+    public Address Address { get; init; }
 
     /// <summary>
     /// Gets the date and time when the user was created.
@@ -30,6 +31,8 @@ public class User : AggregateRoot<UserId>, IUser
     /// identifier for authentication.
     /// </summary>
     public Email Email { get; init; }
+
+    public Name Name { get; init; }
 
     /// <summary>
     /// Gets the hashed password for authentication. Password must meet security requirements:
@@ -47,12 +50,6 @@ public class User : AggregateRoot<UserId>, IUser
     /// Gets the user's role in the system. Determines the user's permissions and access levels.
     /// </summary>
     public UserRole Role { get; init; }
-
-    /// <summary>
-    /// Gets the user's role in the system.
-    /// </summary>
-    /// <returns>The user's role as a string.</returns>
-    string IUser.Role => Role.ToString();
 
     /// <summary>
     /// Gets the user's current status. Indicates whether the user is active, inactive, or blocked
