@@ -2,22 +2,27 @@
 
 namespace Ambev.DeveloperEvaluation.Domain.Common;
 
-public class BaseEntity : IComparable<BaseEntity>
+public class BaseEntity<Tid> : IComparable<BaseEntity<Tid>>
 {
-    public Guid Id { get; set; }
+    public Tid Id { get; protected init; }
 
-    public Task<IEnumerable<ValidationErrorDetail>> ValidateAsync()
-    {
-        return Validator.ValidateAsync(this);
-    }
-
-    public int CompareTo(BaseEntity? other)
+    public int CompareTo(BaseEntity<Tid>? other)
     {
         if (other == null)
         {
             return 1;
         }
 
-        return other!.Id.CompareTo(Id);
+        if (Id is IComparable comparableId && other.Id is IComparable comparableOtherId)
+        {
+            return comparableId.CompareTo(comparableOtherId);
+        }
+
+        throw new InvalidOperationException("Id does not implement IComparable.");
+    }
+
+    public Task<IEnumerable<ValidationErrorDetail>> ValidateAsync()
+    {
+        return Validator.ValidateAsync(this);
     }
 }

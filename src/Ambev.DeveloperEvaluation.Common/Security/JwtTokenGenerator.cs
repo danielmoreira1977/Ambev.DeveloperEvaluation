@@ -16,7 +16,9 @@ public class JwtTokenGenerator : IJwtTokenGenerator
     /// <summary>
     /// Initializes a new instance of the JWT token generator.
     /// </summary>
-    /// <param name="configuration">Application configuration containing the necessary keys for token generation.</param>
+    /// <param name="configuration">
+    /// Application configuration containing the necessary keys for token generation.
+    /// </param>
     public JwtTokenGenerator(IConfiguration configuration)
     {
         _configuration = configuration;
@@ -32,19 +34,21 @@ public class JwtTokenGenerator : IJwtTokenGenerator
     /// - NameIdentifier (User ID)
     /// - Name (Username)
     /// - Role (User role)
-    /// 
+    ///
     /// The token is valid for 8 hours from the moment of generation.
     /// </remarks>
     /// <exception cref="ArgumentNullException">Thrown when user or secret key is not provided.</exception>
     public string GenerateToken(IUser user)
     {
+        //TODO use Secrets
+
         var tokenHandler = new JwtSecurityTokenHandler();
         var key = Encoding.ASCII.GetBytes(_configuration["Jwt:SecretKey"]);
 
         var claims = new[]
         {
-           new Claim(ClaimTypes.NameIdentifier, user.Id),
-           new Claim(ClaimTypes.Name, user.Username),
+           new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
+           new Claim(ClaimTypes.Name, user.Username.Value),
            new Claim(ClaimTypes.Role, user.Role)
        };
 
