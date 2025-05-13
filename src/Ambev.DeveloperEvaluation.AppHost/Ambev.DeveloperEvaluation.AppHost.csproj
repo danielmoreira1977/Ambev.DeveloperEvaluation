@@ -9,10 +9,15 @@
     <UserSecretsId>b1e7a808-9e13-432a-8ffa-7d1806c81119</UserSecretsId>
   </PropertyGroup>
 
-  <ItemGroup>
-    <PackageReference Include="Aspire.Hosting.AppHost" />
-  </ItemGroup>
-
+	<ItemGroup>
+		<PackageReference Include="Aspire.Hosting" />
+		<PackageReference Include="Aspire.Hosting.AppHost" />
+		<PackageReference Include="Aspire.Hosting.PostgreSQL" />
+		<PackageReference Include="Aspire.Hosting.RabbitMQ" />
+		<PackageReference Include="Microsoft.Extensions.Configuration.UserSecrets" />
+		<PackageReference Include="Microsoft.Extensions.Hosting" />
+	</ItemGroup>
+	
   <ItemGroup>
     <ProjectReference Include="..\Ambev.DeveloperEvaluation.WebApi\Ambev.DeveloperEvaluation.WebApi.csproj" />
   </ItemGroup>

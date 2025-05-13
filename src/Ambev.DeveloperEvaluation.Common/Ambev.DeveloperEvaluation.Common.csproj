@@ -13,20 +13,20 @@
 	</ItemGroup>
 
 	<ItemGroup>
+		<PackageReference Include="BCrypt.Net-Next" />
+		<PackageReference Include="FluentValidation" />
+		<PackageReference Include="MediatR" />
 		<PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" />
 		<PackageReference Include="Microsoft.Extensions.Caching.Memory" />
 		<PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" />
 		<PackageReference Include="Microsoft.Extensions.Diagnostics.HealthChecks" />
-		<PackageReference Include="BCrypt.Net-Next" />
-		<PackageReference Include="FluentValidation" />
-		<PackageReference Include="MediatR" />
 		<PackageReference Include="Serilog.AspNetCore" />
+		<PackageReference Include="Serilog.Enrichers.Environment" />
+		<PackageReference Include="Serilog.Enrichers.ExceptionData" />
 		<PackageReference Include="Serilog.Exceptions" />
 		<PackageReference Include="Serilog.Exceptions.EntityFrameworkCore" />
 		<PackageReference Include="Serilog.Expressions" />
 		<PackageReference Include="Serilog.Sinks.Console" />
-		<PackageReference Include="Serilog.Enrichers.ExceptionData" />
-		<PackageReference Include="Serilog.Enrichers.Environment" />
 	</ItemGroup>
 	
 </Project>

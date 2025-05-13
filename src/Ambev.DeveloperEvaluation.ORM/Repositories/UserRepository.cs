@@ -59,7 +59,7 @@ public class UserRepository : IUserRepository
     public async Task<User?> GetByEmailAsync(string email, CancellationToken cancellationToken = default)
     {
         return await _context.Users
-            .FirstOrDefaultAsync(u => u.Email == email, cancellationToken);
+            .FirstOrDefaultAsync(u => u.Email.Value == email, cancellationToken);
     }
 
     /// <summary>
@@ -70,6 +70,6 @@ public class UserRepository : IUserRepository
     /// <returns>The user if found, null otherwise</returns>
     public async Task<User?> GetByIdAsync(Guid id, CancellationToken cancellationToken = default)
     {
-        return await _context.Users.FirstOrDefaultAsync(o => o.Id == id, cancellationToken);
+        return await _context.Users.FirstOrDefaultAsync(o => o.Id.Value == id, cancellationToken);
     }
 }
