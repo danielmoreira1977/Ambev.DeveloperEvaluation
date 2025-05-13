@@ -2,7 +2,6 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
-using System;
 using System.Text;
 
 namespace Ambev.DeveloperEvaluation.Common.Security
@@ -13,7 +12,10 @@ namespace Ambev.DeveloperEvaluation.Common.Security
         {
             services.AddScoped<IJwtTokenGenerator, JwtTokenGenerator>();
 
-            var secretKey = configuration["Jwt:SecretKey"]?.ToString();
+            var jwtSettings = configuration.GetSection("JwtSettings");
+            services.Configure<JwtSettings>(jwtSettings);
+
+            var secretKey = jwtSettings["SecretKey"]!;
             ArgumentException.ThrowIfNullOrWhiteSpace(secretKey);
 
             var key = Encoding.ASCII.GetBytes(secretKey);
@@ -36,8 +38,6 @@ namespace Ambev.DeveloperEvaluation.Common.Security
                     ClockSkew = TimeSpan.Zero
                 };
             });
-
-            services.AddScoped<IJwtTokenGenerator, JwtTokenGenerator>();
 
             return services;
         }

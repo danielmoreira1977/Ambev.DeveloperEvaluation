@@ -9,10 +9,30 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Common\**" />
+    <Compile Remove="Features\**" />
+    <Compile Remove="Mappings\**" />
+    <Compile Remove="Middleware\**" />
+    <Content Remove="Common\**" />
+    <Content Remove="Features\**" />
+    <Content Remove="Mappings\**" />
+    <Content Remove="Middleware\**" />
+    <EmbeddedResource Remove="Common\**" />
+    <EmbeddedResource Remove="Features\**" />
+    <EmbeddedResource Remove="Mappings\**" />
+    <EmbeddedResource Remove="Middleware\**" />
+    <None Remove="Common\**" />
+    <None Remove="Features\**" />
+    <None Remove="Mappings\**" />
+    <None Remove="Middleware\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.OpenApi" />
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Ambev.DeveloperEvaluation.Common\Ambev.DeveloperEvaluation.Common.csproj" />
     <ProjectReference Include="..\Ambev.DeveloperEvaluation.ServiceDefaults\Ambev.DeveloperEvaluation.ServiceDefaults.csproj" />
   </ItemGroup>
 

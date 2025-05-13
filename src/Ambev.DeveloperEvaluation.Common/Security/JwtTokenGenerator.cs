@@ -1,7 +1,8 @@
-using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
+using System.Security.Cryptography;
 using System.Text;
 
 namespace Ambev.DeveloperEvaluation.Common.Security;
@@ -9,19 +10,20 @@ namespace Ambev.DeveloperEvaluation.Common.Security;
 /// <summary>
 /// Implementation of JWT (JSON Web Token) generator.
 /// </summary>
-public class JwtTokenGenerator : IJwtTokenGenerator
+public sealed class JwtTokenGenerator(IOptions<JwtSettings> jwtSettings) : IJwtTokenGenerator
 {
-    private readonly IConfiguration _configuration;
+    private readonly JwtSettings _jwtSettings = jwtSettings.Value;
 
     /// <summary>
-    /// Initializes a new instance of the JWT token generator.
+    /// Generate a new Refresh Token.
     /// </summary>
-    /// <param name="configuration">
-    /// Application configuration containing the necessary keys for token generation.
-    /// </param>
-    public JwtTokenGenerator(IConfiguration configuration)
+    /// <returns>An Refresh Token</returns>
+    public static string GenerateRefreshToken()
     {
-        _configuration = configuration;
+        var randomBytes = new byte[64];
+        using var rng = RandomNumberGenerator.Create();
+        rng.GetBytes(randomBytes);
+        return Convert.ToBase64String(randomBytes);
     }
 
     /// <summary>
@@ -42,10 +44,8 @@ public class JwtTokenGenerator : IJwtTokenGenerator
     /// <exception cref="ArgumentNullException">Thrown when user or secret key is not provided.</exception>
     public string GenerateToken(Guid id, string username, string role)
     {
-        //TODO use Secrets
-
         var tokenHandler = new JwtSecurityTokenHandler();
-        var key = Encoding.ASCII.GetBytes(_configuration["Jwt:SecretKey"]);
+        var key = Encoding.ASCII.GetBytes(_jwtSettings.SecretKey!);
 
         var claims = new[]
         {
