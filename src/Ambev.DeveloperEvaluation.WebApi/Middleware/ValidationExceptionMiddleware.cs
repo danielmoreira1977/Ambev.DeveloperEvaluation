@@ -1,5 +1,5 @@
-﻿using Ambev.DeveloperEvaluation.Common.Validation;
-using Ambev.DeveloperEvaluation.WebApi.Common;
+﻿using Ambev.DeveloperEvaluation.Common.HttpResults;
+using Ambev.DeveloperEvaluation.Common.Validation;
 using FluentValidation;
 using System.Text.Json;
 

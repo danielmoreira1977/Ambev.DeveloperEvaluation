@@ -1,0 +1,5 @@
+﻿@Ambev.DeveloperEvaluation.WebApi_HostAddress = https://localhost:7057
+
+GET {{Ambev.DeveloperEvaluation.WebApi_HostAddress}}/authentication/generate-test-token
+
+###

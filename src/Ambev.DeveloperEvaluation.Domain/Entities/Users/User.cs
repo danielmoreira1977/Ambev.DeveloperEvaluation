@@ -14,7 +14,7 @@ public class User : AggregateRoot<UserId>, IUser
     /// <summary>
     /// Used by Ef core.
     /// </summary>
-    protected User()
+    public User()
     {
         CreatedAt = DateTime.UtcNow;
     }
@@ -55,7 +55,7 @@ public class User : AggregateRoot<UserId>, IUser
     /// Gets the user's current status. Indicates whether the user is active, inactive, or blocked
     /// in the system.
     /// </summary>
-    public UserStatus Status { get; private set; }
+    public UserStatus Status { get; set; }
 
     /// <summary>
     /// Gets the date and time of the last update to the user's information.

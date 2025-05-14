@@ -1,4 +1,4 @@
-﻿namespace Ambev.DeveloperEvaluation.WebApi.Common;
+﻿namespace Ambev.DeveloperEvaluation.Common.HttpResults;
 
 public class ApiResponseWithData<T> : ApiResponse
 {

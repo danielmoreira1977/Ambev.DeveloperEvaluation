@@ -10,6 +10,7 @@ namespace Ambev.DeveloperEvaluation.Common.Security
     {
         public static IServiceCollection AddJwtAuthentication(this IServiceCollection services, IConfiguration configuration)
         {
+            services.AddAuthorization();
             services.AddScoped<IJwtTokenGenerator, JwtTokenGenerator>();
 
             var jwtSettings = configuration.GetSection("JwtSettings");

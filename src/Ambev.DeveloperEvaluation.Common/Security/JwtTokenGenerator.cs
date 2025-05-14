@@ -18,7 +18,7 @@ public sealed class JwtTokenGenerator(IOptions<JwtSettings> jwtSettings) : IJwtT
     /// Generate a new Refresh Token.
     /// </summary>
     /// <returns>An Refresh Token</returns>
-    public static string GenerateRefreshToken()
+    public string GenerateRefreshToken()
     {
         var randomBytes = new byte[64];
         using var rng = RandomNumberGenerator.Create();

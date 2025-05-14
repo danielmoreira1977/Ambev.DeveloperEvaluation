@@ -12,10 +12,10 @@
 		<PackageReference Include="AutoMapper" />
 		<PackageReference Include="MediatR" />
 		<PackageReference Include="Microsoft.Extensions.Caching.Memory" />
-		<PackageReference Include="OneOf" />
 	</ItemGroup>
 
 	<ItemGroup>
 		<ProjectReference Include="..\Ambev.DeveloperEvaluation.Domain\Ambev.DeveloperEvaluation.Domain.csproj" />
+		<ProjectReference Include="..\Ambev.DeveloperEvaluation.ORM\Ambev.DeveloperEvaluation.ORM.csproj" />
 	</ItemGroup>
 </Project>

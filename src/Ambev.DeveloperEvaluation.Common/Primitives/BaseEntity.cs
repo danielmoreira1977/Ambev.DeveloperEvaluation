@@ -4,7 +4,7 @@ namespace Ambev.DeveloperEvaluation.Common.Primitives;
 
 public class BaseEntity<Tid> : IComparable<BaseEntity<Tid>>
 {
-    public Tid Id { get; protected init; }
+    public Tid Id { get; init; }
 
     public int CompareTo(BaseEntity<Tid>? other)
     {
