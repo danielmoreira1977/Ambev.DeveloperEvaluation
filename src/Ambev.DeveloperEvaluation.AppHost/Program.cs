@@ -14,8 +14,13 @@ var postgres = builder.AddPostgres("ambev-db-server", dbUsername, dbPassword)
     .WithPgAdmin()
     .WithDataVolume(isReadOnly: false);
 
-var readOnlyDb = postgres.AddDatabase("ambev-db");
+var database = postgres.AddDatabase("ambev-db");
 
-builder.AddProject<Projects.Ambev_DeveloperEvaluation_WebApi>("ambev-developerevaluation-webapi");
+var migrator = builder.AddProject<Projects.Ambev_DeveloperEvaluation_Migrator>("ambev-developerevaluation-migrator")
+    .WithReference(database).WaitFor(database);
+
+builder.AddProject<Projects.Ambev_DeveloperEvaluation_WebApi>("ambev-developerevaluation-webapi")
+    .WithReference(rabbitmq).WaitFor(rabbitmq)
+    .WithReference(database).WaitFor(database);
 
 builder.Build().Run();

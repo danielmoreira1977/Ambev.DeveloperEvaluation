@@ -1,5 +1,7 @@
-﻿using Microsoft.AspNetCore.Builder;
+﻿using Ambev.DeveloperEvaluation.ORM;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 
 namespace Ambev.DeveloperEvaluation.IoC.ModuleInitializers
 {
@@ -7,6 +9,8 @@ namespace Ambev.DeveloperEvaluation.IoC.ModuleInitializers
     {
         public void Initialize(WebApplicationBuilder builder)
         {
+            builder.AddNpgsqlDbContext<DefaultContext>(connectionName: "ambev-db");
+
             builder.Services.AddHealthChecks();
         }
     }

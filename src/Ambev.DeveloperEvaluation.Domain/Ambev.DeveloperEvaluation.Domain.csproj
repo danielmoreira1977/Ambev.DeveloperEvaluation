@@ -8,13 +8,23 @@
 
   </PropertyGroup>
 
+  <ItemGroup>
+    <Compile Remove="Repositories\IUserRepository.cs" />
+  </ItemGroup>
+
 	<ItemGroup>
+		<PackageReference Include="Ardalis.SmartEnum" />
+		<PackageReference Include="Ardalis.SmartEnum.EFCore" />
 		<PackageReference Include="FluentValidation" />
 		<PackageReference Include="Microsoft.Extensions.Caching.Memory" />
 	</ItemGroup>
 
 	<ItemGroup>
 	  <ProjectReference Include="..\Ambev.DeveloperEvaluation.Common\Ambev.DeveloperEvaluation.Common.csproj" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Folder Include="Repositories\" />
 	</ItemGroup>
 	
 </Project>

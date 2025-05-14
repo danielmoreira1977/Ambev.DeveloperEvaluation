@@ -1,0 +1,22 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Worker">
+
+  <PropertyGroup>
+    <TargetFramework>net9.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+	<UserSecretsId>b1e7a808-9e13-432a-8ffa-7d1806c81119</UserSecretsId>
+  </PropertyGroup>
+
+  <ItemGroup>
+	  	  <PackageReference Include="Aspire.Npgsql.EntityFrameworkCore.PostgreSQL" />
+	  <PackageReference Include="Microsoft.Extensions.Configuration.UserSecrets" />
+	  <PackageReference Include="Microsoft.Extensions.Hosting" />
+	  <PackageReference Include="Microsoft.Extensions.Http.Resilience" />
+	  <PackageReference Include="System.Formats.Asn1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Ambev.DeveloperEvaluation.ORM\Ambev.DeveloperEvaluation.ORM.csproj" />
+    <ProjectReference Include="..\Ambev.DeveloperEvaluation.ServiceDefaults\Ambev.DeveloperEvaluation.ServiceDefaults.csproj" />
+  </ItemGroup>
+</Project>

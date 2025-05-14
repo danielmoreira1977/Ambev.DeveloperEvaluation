@@ -1,12 +1,15 @@
-using Ambev.DeveloperEvaluation.Common.Primitives;
+using Ardalis.SmartEnum;
 
 namespace Ambev.DeveloperEvaluation.Domain.Enums;
 
-public class UserStatus(int id, string name)
-    : Enumeration(id, name)
+public class UserStatus : SmartEnum<UserStatus>
 {
-    public static UserStatus Active = new(2, nameof(Active));
-    public static UserStatus Inactive = new(3, nameof(Inactive));
-    public static UserStatus Suspended = new(4, nameof(Suspended));
-    public static UserStatus Unknown = new(1, nameof(Unknown));
+    public static readonly UserStatus Active = new("Active", 2);
+    public static readonly UserStatus Inactive = new("Inactive", 3);
+    public static readonly UserStatus Suspended = new("Suspended", 4);
+    public static readonly UserStatus Unknown = new("Unknown", 1);
+
+    private UserStatus(string name, int value) : base(name, value)
+    {
+    }
 }

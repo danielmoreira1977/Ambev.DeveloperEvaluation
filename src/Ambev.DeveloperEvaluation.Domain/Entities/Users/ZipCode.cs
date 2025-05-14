@@ -1,7 +1,12 @@
-﻿namespace Ambev.DeveloperEvaluation.Common.Primitives
+﻿using Microsoft.EntityFrameworkCore;
+
+namespace Ambev.DeveloperEvaluation.Domain.Entities.Users
 {
-    public readonly record struct ZipCode(string Value)
+    [Owned]
+    public sealed class ZipCode()
     {
+        public string Value { get; set; } = string.Empty;
+
         public override string ToString()
         {
             if (string.IsNullOrWhiteSpace(Value))
@@ -20,6 +25,3 @@
         }
     }
 }
-
-// "address": { "city": "string", "street": "string", "number": "integer", "zipcode": "string",
-// "geolocation": { "lat": "string", "long": "string" }

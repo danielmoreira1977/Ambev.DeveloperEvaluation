@@ -1,6 +1,7 @@
 ﻿using Ambev.DeveloperEvaluation.Common.Constants;
 using Ambev.DeveloperEvaluation.Common.Primitives;
 using Ambev.DeveloperEvaluation.Domain.Entities.Users;
+using Ambev.DeveloperEvaluation.Domain.Enums;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -27,6 +28,8 @@ public class UserConfiguration : IEntityTypeConfiguration<User>
         )
         .IsRequired().HasMaxLength(DatabaseSizes.EmailSize);
 
+        builder.OwnsOne(u => u.Name);
+
         builder.Property(b => b.Password)
         .HasConversion(
             password => password.Value,
@@ -49,11 +52,21 @@ public class UserConfiguration : IEntityTypeConfiguration<User>
         .IsRequired().HasMaxLength(DatabaseSizes.UsernameSize);
 
         builder.Property(u => u.Role)
-            .HasConversion<string>()
-            .HasMaxLength(DatabaseSizes.RoleSize);
+        .HasConversion(
+            p => p.Value,
+            value => UserRole.FromValue(value)
+        );
 
         builder.Property(u => u.Status)
-            .HasConversion<string>()
-            .HasMaxLength(DatabaseSizes.StatusSize);
+        .HasConversion(
+            p => p.Value,
+            value => UserStatus.FromValue(value)
+        );
+
+        builder.OwnsOne(u => u.Address, address =>
+        {
+            address.OwnsOne(a => a.Geolocation);
+            address.OwnsOne(a => a.ZipCode);
+        });
     }
 }

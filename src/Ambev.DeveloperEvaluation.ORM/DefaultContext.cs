@@ -5,10 +5,6 @@ using System.Reflection;
 
 namespace Ambev.DeveloperEvaluation.ORM;
 
-public interface IDefaultContext
-{
-}
-
 public class DefaultContext(
     DbContextOptions<DefaultContext> options
     //,IPublisher publisher
@@ -46,7 +42,7 @@ public class DefaultContext(
     {
         base.OnModelCreating(builder);
 
-        builder.HasDefaultSchema("identity");
+        builder.HasDefaultSchema("DevTest");
 
         builder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
 
