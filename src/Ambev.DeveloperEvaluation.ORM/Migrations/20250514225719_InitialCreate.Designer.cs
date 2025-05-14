@@ -12,7 +12,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Ambev.DeveloperEvaluation.ORM.Migrations
 {
     [DbContext(typeof(DefaultContext))]
-    [Migration("20250514215751_InitialCreate")]
+    [Migration("20250514225719_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -20,11 +20,88 @@ namespace Ambev.DeveloperEvaluation.ORM.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasDefaultSchema("identity")
+                .HasDefaultSchema("DevTest")
                 .HasAnnotation("ProductVersion", "9.0.4")
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
+
+            modelBuilder.Entity("Ambev.DeveloperEvaluation.Domain.Entities.Carts.Cart", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .HasColumnType("uuid")
+                        .HasColumnName("Id");
+
+                    b.Property<DateTime>("Date")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("UserId");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Cart", "DevTest");
+                });
+
+            modelBuilder.Entity("Ambev.DeveloperEvaluation.Domain.Entities.Carts.CartProduct", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid")
+                        .HasColumnName("Id");
+
+                    b.Property<Guid>("CartId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("CartId");
+
+                    b.Property<Guid>("ProductId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("ProductId");
+
+                    b.Property<int>("Quantity")
+                        .HasColumnType("integer")
+                        .HasColumnName("Quantity");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CartId");
+
+                    b.HasIndex("ProductId");
+
+                    b.ToTable("CartProducts", "DevTest");
+                });
+
+            modelBuilder.Entity("Ambev.DeveloperEvaluation.Domain.Entities.Products.Product", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .HasColumnType("uuid")
+                        .HasColumnName("Id");
+
+                    b.Property<string>("Category")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("Image")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<decimal>("Price")
+                        .HasColumnType("numeric")
+                        .HasColumnName("Price");
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Products", "DevTest");
+                });
 
             modelBuilder.Entity("Ambev.DeveloperEvaluation.Domain.Entities.Users.User", b =>
                 {
@@ -66,7 +143,51 @@ namespace Ambev.DeveloperEvaluation.ORM.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Users", "identity");
+                    b.ToTable("Users", "DevTest");
+                });
+
+            modelBuilder.Entity("Ambev.DeveloperEvaluation.Domain.Entities.Carts.CartProduct", b =>
+                {
+                    b.HasOne("Ambev.DeveloperEvaluation.Domain.Entities.Carts.Cart", "Cart")
+                        .WithMany("Products")
+                        .HasForeignKey("CartId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("Ambev.DeveloperEvaluation.Domain.Entities.Products.Product", "Product")
+                        .WithMany()
+                        .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Cart");
+
+                    b.Navigation("Product");
+                });
+
+            modelBuilder.Entity("Ambev.DeveloperEvaluation.Domain.Entities.Products.Product", b =>
+                {
+                    b.OwnsOne("Ambev.DeveloperEvaluation.Domain.Entities.Products.Rating", "Rating", b1 =>
+                        {
+                            b1.Property<Guid>("ProductId")
+                                .HasColumnType("uuid");
+
+                            b1.Property<int>("Count")
+                                .HasColumnType("integer");
+
+                            b1.Property<double>("Rate")
+                                .HasColumnType("double precision");
+
+                            b1.HasKey("ProductId");
+
+                            b1.ToTable("Products", "DevTest");
+
+                            b1.WithOwner()
+                                .HasForeignKey("ProductId");
+                        });
+
+                    b.Navigation("Rating")
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Ambev.DeveloperEvaluation.Domain.Entities.Users.User", b =>
@@ -89,7 +210,7 @@ namespace Ambev.DeveloperEvaluation.ORM.Migrations
 
                             b1.HasKey("UserId");
 
-                            b1.ToTable("Users", "identity");
+                            b1.ToTable("Users", "DevTest");
 
                             b1.WithOwner()
                                 .HasForeignKey("UserId");
@@ -109,7 +230,7 @@ namespace Ambev.DeveloperEvaluation.ORM.Migrations
 
                                     b2.HasKey("AddressUserId");
 
-                                    b2.ToTable("Users", "identity");
+                                    b2.ToTable("Users", "DevTest");
 
                                     b2.WithOwner()
                                         .HasForeignKey("AddressUserId");
@@ -126,7 +247,7 @@ namespace Ambev.DeveloperEvaluation.ORM.Migrations
 
                                     b2.HasKey("AddressUserId");
 
-                                    b2.ToTable("Users", "identity");
+                                    b2.ToTable("Users", "DevTest");
 
                                     b2.WithOwner()
                                         .HasForeignKey("AddressUserId");
@@ -154,7 +275,7 @@ namespace Ambev.DeveloperEvaluation.ORM.Migrations
 
                             b1.HasKey("UserId");
 
-                            b1.ToTable("Users", "identity");
+                            b1.ToTable("Users", "DevTest");
 
                             b1.WithOwner()
                                 .HasForeignKey("UserId");
@@ -165,6 +286,11 @@ namespace Ambev.DeveloperEvaluation.ORM.Migrations
 
                     b.Navigation("Name")
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("Ambev.DeveloperEvaluation.Domain.Entities.Carts.Cart", b =>
+                {
+                    b.Navigation("Products");
                 });
 #pragma warning restore 612, 618
         }

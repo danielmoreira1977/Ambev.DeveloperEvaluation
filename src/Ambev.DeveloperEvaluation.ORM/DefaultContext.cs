@@ -1,4 +1,6 @@
 ﻿using Ambev.DeveloperEvaluation.Common.Primitives.Interfaces;
+using Ambev.DeveloperEvaluation.Domain.Entities.Carts;
+using Ambev.DeveloperEvaluation.Domain.Entities.Products;
 using Ambev.DeveloperEvaluation.Domain.Entities.Users;
 using Microsoft.EntityFrameworkCore;
 using System.Reflection;
@@ -10,6 +12,10 @@ public class DefaultContext(
     //,IPublisher publisher
     ) : DbContext(options), IDefaultContext
 {
+    public DbSet<Cart> Carts => Set<Cart>();
+
+    public DbSet<Product> Products => Set<Product>();
+
     //private readonly IPublisher _publisher = publisher;
     public DbSet<User> Users => Set<User>();
 
@@ -45,8 +51,6 @@ public class DefaultContext(
         builder.HasDefaultSchema("DevTest");
 
         builder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
-
-        //builder.ApplyConfiguration(new UserConfiguration());
     }
 
     private async Task<bool> PublishDomainEventsAsync()
