@@ -25,15 +25,18 @@ namespace Ambev.DeveloperEvaluation.ORM.Migrations
 
             modelBuilder.Entity("Ambev.DeveloperEvaluation.Domain.Entities.Carts.Cart", b =>
                 {
-                    b.Property<Guid>("Id")
-                        .HasColumnType("uuid")
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
                         .HasColumnName("Id");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
                     b.Property<DateTime>("Date")
                         .HasColumnType("timestamp with time zone");
 
-                    b.Property<Guid>("UserId")
-                        .HasColumnType("uuid")
+                    b.Property<int>("UserId")
+                        .HasColumnType("integer")
                         .HasColumnName("UserId");
 
                     b.HasKey("Id");
@@ -43,17 +46,19 @@ namespace Ambev.DeveloperEvaluation.ORM.Migrations
 
             modelBuilder.Entity("Ambev.DeveloperEvaluation.Domain.Entities.Carts.CartProduct", b =>
                 {
-                    b.Property<Guid>("Id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid")
+                        .HasColumnType("integer")
                         .HasColumnName("Id");
 
-                    b.Property<Guid>("CartId")
-                        .HasColumnType("uuid")
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("CartId")
+                        .HasColumnType("integer")
                         .HasColumnName("CartId");
 
-                    b.Property<Guid>("ProductId")
-                        .HasColumnType("uuid")
+                    b.Property<int>("ProductId")
+                        .HasColumnType("integer")
                         .HasColumnName("ProductId");
 
                     b.Property<int>("Quantity")
@@ -71,9 +76,12 @@ namespace Ambev.DeveloperEvaluation.ORM.Migrations
 
             modelBuilder.Entity("Ambev.DeveloperEvaluation.Domain.Entities.Products.Product", b =>
                 {
-                    b.Property<Guid>("Id")
-                        .HasColumnType("uuid")
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
                         .HasColumnName("Id");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Category")
                         .IsRequired()
@@ -101,9 +109,12 @@ namespace Ambev.DeveloperEvaluation.ORM.Migrations
 
             modelBuilder.Entity("Ambev.DeveloperEvaluation.Domain.Entities.Users.User", b =>
                 {
-                    b.Property<Guid>("Id")
-                        .HasColumnType("uuid")
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
                         .HasColumnName("Id");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("timestamp with time zone");
@@ -165,8 +176,8 @@ namespace Ambev.DeveloperEvaluation.ORM.Migrations
                 {
                     b.OwnsOne("Ambev.DeveloperEvaluation.Domain.Entities.Products.Rating", "Rating", b1 =>
                         {
-                            b1.Property<Guid>("ProductId")
-                                .HasColumnType("uuid");
+                            b1.Property<int>("ProductId")
+                                .HasColumnType("integer");
 
                             b1.Property<int>("Count")
                                 .HasColumnType("integer");
@@ -189,8 +200,8 @@ namespace Ambev.DeveloperEvaluation.ORM.Migrations
                 {
                     b.OwnsOne("Ambev.DeveloperEvaluation.Domain.Entities.Users.Address", "Address", b1 =>
                         {
-                            b1.Property<Guid>("UserId")
-                                .HasColumnType("uuid");
+                            b1.Property<int>("UserId")
+                                .HasColumnType("integer");
 
                             b1.Property<string>("City")
                                 .IsRequired()
@@ -213,8 +224,8 @@ namespace Ambev.DeveloperEvaluation.ORM.Migrations
 
                             b1.OwnsOne("Ambev.DeveloperEvaluation.Domain.Entities.Users.Geolocation", "Geolocation", b2 =>
                                 {
-                                    b2.Property<Guid>("AddressUserId")
-                                        .HasColumnType("uuid");
+                                    b2.Property<int>("AddressUserId")
+                                        .HasColumnType("integer");
 
                                     b2.Property<double>("Lat")
                                         .HasColumnType("double precision");
@@ -232,8 +243,8 @@ namespace Ambev.DeveloperEvaluation.ORM.Migrations
 
                             b1.OwnsOne("Ambev.DeveloperEvaluation.Domain.Entities.Users.ZipCode", "ZipCode", b2 =>
                                 {
-                                    b2.Property<Guid>("AddressUserId")
-                                        .HasColumnType("uuid");
+                                    b2.Property<int>("AddressUserId")
+                                        .HasColumnType("integer");
 
                                     b2.Property<string>("Value")
                                         .IsRequired()
@@ -256,8 +267,8 @@ namespace Ambev.DeveloperEvaluation.ORM.Migrations
 
                     b.OwnsOne("Ambev.DeveloperEvaluation.Domain.Entities.Users.Name", "Name", b1 =>
                         {
-                            b1.Property<Guid>("UserId")
-                                .HasColumnType("uuid");
+                            b1.Property<int>("UserId")
+                                .HasColumnType("integer");
 
                             b1.Property<string>("Firstname")
                                 .IsRequired()

@@ -27,7 +27,8 @@ public static class AuthenticationEndpoints
         /// <response code="200">Tokens gerados com sucesso</response>
         app.MapGet("/auth/generate-test-token", (IJwtTokenGenerator _jwtTokenGenerator) =>
         {
-            var userId = Guid.NewGuid();
+            //Fake user information for testing purposes
+            var userId = 100;
             var email = "user@email.com";
             var nome = "Daniel Moreira";
 

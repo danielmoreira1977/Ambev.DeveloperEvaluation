@@ -5,7 +5,7 @@ namespace Ambev.DeveloperEvaluation.Application.Auth.AuthenticateUser;
 /// </summary>
 public record struct AuthenticateUserResult
     (
-    Guid Id,
+    int Id,
     string Email,
     string Name,
     string Phone,

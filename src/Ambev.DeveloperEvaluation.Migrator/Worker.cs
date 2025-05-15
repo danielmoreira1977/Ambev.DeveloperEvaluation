@@ -7,7 +7,6 @@ using Bogus;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Storage;
-using System;
 using System.Diagnostics;
 
 namespace Ambev.DeveloperEvaluation.Migrator;

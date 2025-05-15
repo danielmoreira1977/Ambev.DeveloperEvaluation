@@ -1,5 +1,6 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
-using Ambev.DeveloperEvaluation.Common.Primitives.Interfaces;
+﻿using Ambev.DeveloperEvaluation.Common.Primitives.Interfaces;
+
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Ambev.DeveloperEvaluation.Common.Primitives;
 

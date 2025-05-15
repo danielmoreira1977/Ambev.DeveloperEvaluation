@@ -13,7 +13,9 @@ public class CartProductConfiguration : IEntityTypeConfiguration<CartProduct>
 
         builder.HasKey(u => u.Id);
 
-        builder.Property(b => b.Id).HasColumnName("Id");
+        builder.Property(b => b.Id)
+            .ValueGeneratedOnAdd()
+            .HasColumnName("Id");
 
         builder.Property(b => b.CartId)
         .HasConversion(

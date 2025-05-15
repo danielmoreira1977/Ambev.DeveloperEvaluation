@@ -4,6 +4,6 @@ namespace Ambev.DeveloperEvaluation.Common.Security
     {
         string GenerateRefreshToken();
 
-        string GenerateToken(Guid id, string username, string role);
+        string GenerateToken(int id, string username, string role);
     }
 }

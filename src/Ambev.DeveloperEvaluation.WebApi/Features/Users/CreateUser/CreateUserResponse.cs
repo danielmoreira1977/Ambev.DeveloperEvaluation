@@ -8,6 +8,11 @@ namespace Ambev.DeveloperEvaluation.WebApi.Features.Users.CreateUser;
 public class CreateUserResponse
 {
     /// <summary>
+    /// The user's email address
+    /// </summary>
+    public string Email { get; set; } = string.Empty;
+
+    /// <summary>
     /// The unique identifier of the created user
     /// </summary>
     public Guid Id { get; set; }
@@ -16,11 +21,6 @@ public class CreateUserResponse
     /// The user's full name
     /// </summary>
     public string Name { get; set; } = string.Empty;
-
-    /// <summary>
-    /// The user's email address
-    /// </summary>
-    public string Email { get; set; } = string.Empty;
 
     /// <summary>
     /// The user's phone number

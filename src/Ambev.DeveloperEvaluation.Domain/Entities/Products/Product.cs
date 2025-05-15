@@ -6,7 +6,6 @@ namespace Ambev.DeveloperEvaluation.Domain.Entities.Products
     {
         public Product(string category, string description, Price price, Rating rating, string title, string? image = null)
         {
-            Id = ProductId.New();
             Category = category;
             Description = description;
             Price = price;

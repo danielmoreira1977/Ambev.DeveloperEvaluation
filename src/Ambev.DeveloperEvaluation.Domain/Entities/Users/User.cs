@@ -19,7 +19,6 @@ public class User : AggregateRoot<UserId>, IUser
 
     public User(Address address, Email email, Name name, Password password, Phone phone, UserRole role, Username username)
     {
-        Id = UserId.New();
         CreatedAt = DateTime.UtcNow;
         Address = address;
         Email = email;

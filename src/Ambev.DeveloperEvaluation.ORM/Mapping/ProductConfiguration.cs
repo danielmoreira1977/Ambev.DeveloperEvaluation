@@ -14,6 +14,7 @@ public class ProductConfiguration : IEntityTypeConfiguration<Product>
         builder.HasKey(u => u.Id);
 
         builder.Property(b => b.Id)
+            .ValueGeneratedOnAdd()
             .HasConversion(
                 id => id.Value,
                 value => new ProductId(value)

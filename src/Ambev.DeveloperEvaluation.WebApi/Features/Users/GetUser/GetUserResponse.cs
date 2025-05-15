@@ -8,6 +8,11 @@ namespace Ambev.DeveloperEvaluation.WebApi.Features.Users.GetUser;
 public class GetUserResponse
 {
     /// <summary>
+    /// The user's email address
+    /// </summary>
+    public string Email { get; set; } = string.Empty;
+
+    /// <summary>
     /// The unique identifier of the user
     /// </summary>
     public Guid Id { get; set; }
@@ -16,11 +21,6 @@ public class GetUserResponse
     /// The user's full name
     /// </summary>
     public string Name { get; set; } = string.Empty;
-
-    /// <summary>
-    /// The user's email address
-    /// </summary>
-    public string Email { get; set; } = string.Empty;
 
     /// <summary>
     /// The user's phone number
