@@ -3,7 +3,7 @@ using Ambev.DeveloperEvaluation.Domain.Entities.Products;
 
 namespace Ambev.DeveloperEvaluation.Domain.Entities.Carts
 {
-    public class CartProduct : BaseEntity<Guid>
+    public class CartProduct : BaseEntity<int>
     {
         public Cart Cart { get; set; } = null!;
         public CartId CartId { get; set; }

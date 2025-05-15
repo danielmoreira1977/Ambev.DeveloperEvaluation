@@ -25,7 +25,7 @@ public static class AuthenticationEndpoints
         /// </remarks>
         /// <returns>Um objeto [TokenResponse] contendo o access token e o refresh token</returns>
         /// <response code="200">Tokens gerados com sucesso</response>
-        app.MapGet("/authentication/generate-test-token", (IJwtTokenGenerator _jwtTokenGenerator) =>
+        app.MapGet("/auth/generate-test-token", (IJwtTokenGenerator _jwtTokenGenerator) =>
         {
             var userId = Guid.NewGuid();
             var email = "user@email.com";
@@ -40,7 +40,7 @@ public static class AuthenticationEndpoints
         .WithTags(AuthenticationTag)
         .WithOpenApi();
 
-        app.MapPost("/authentication/authenticate-user",
+        app.MapPost("/auth/login",
             async (
                 [FromBody] AuthenticateUserRequest request,
                 [FromServices] IMediator mediator,

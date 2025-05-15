@@ -1,9 +1,8 @@
 ﻿namespace Ambev.DeveloperEvaluation.Common.Primitives
 {
-    public record struct CartProductId(Guid Value)
+    public record struct CartProductId(int Value)
     {
-        public static CartProductId New() => new(Guid.NewGuid());
-        public static CartProductId Empty() => new(Guid.Empty);
+        public static CartProductId New() => new(0);
 
         public override readonly string ToString() => Value.ToString();
     }
