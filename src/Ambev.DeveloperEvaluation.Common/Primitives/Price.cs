@@ -1,4 +1,7 @@
 ﻿namespace Ambev.DeveloperEvaluation.Common.Primitives
 {
-    public readonly record struct Price(decimal Value);
+    public record struct Price(decimal Value)
+    {
+        public static Price Empty() => new(0m);
+    }
 }

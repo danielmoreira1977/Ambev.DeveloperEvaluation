@@ -11,12 +11,11 @@ namespace Ambev.DeveloperEvaluation.Domain.Entities.Users
     {
         Address Address { get; }
         Email Email { get; }
-        UserId Id { get; }
-        Name Name { get; }
+        Name? Name { get; }
         Password Password { get; }
         Phone Phone { get; }
-        UserRole Role { get; }
-        UserStatus Status { get; }
+        UserRole? Role { get; }
+        UserStatus? Status { get; }
         DateTime? UpdatedAt { get; }
         Username Username { get; }
 

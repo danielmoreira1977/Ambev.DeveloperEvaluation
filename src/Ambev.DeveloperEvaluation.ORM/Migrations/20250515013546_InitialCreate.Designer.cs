@@ -12,7 +12,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Ambev.DeveloperEvaluation.ORM.Migrations
 {
     [DbContext(typeof(DefaultContext))]
-    [Migration("20250514225719_InitialCreate")]
+    [Migration("20250515013546_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -87,7 +87,6 @@ namespace Ambev.DeveloperEvaluation.ORM.Migrations
                         .HasColumnType("text");
 
                     b.Property<string>("Image")
-                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<decimal>("Price")
@@ -130,7 +129,7 @@ namespace Ambev.DeveloperEvaluation.ORM.Migrations
                     b.Property<int>("Role")
                         .HasColumnType("integer");
 
-                    b.Property<int>("Status")
+                    b.Property<int?>("Status")
                         .HasColumnType("integer");
 
                     b.Property<DateTime?>("UpdatedAt")
@@ -186,8 +185,7 @@ namespace Ambev.DeveloperEvaluation.ORM.Migrations
                                 .HasForeignKey("ProductId");
                         });
 
-                    b.Navigation("Rating")
-                        .IsRequired();
+                    b.Navigation("Rating");
                 });
 
             modelBuilder.Entity("Ambev.DeveloperEvaluation.Domain.Entities.Users.User", b =>
@@ -201,8 +199,9 @@ namespace Ambev.DeveloperEvaluation.ORM.Migrations
                                 .IsRequired()
                                 .HasColumnType("text");
 
-                            b1.Property<int>("Number")
-                                .HasColumnType("integer");
+                            b1.Property<string>("Number")
+                                .IsRequired()
+                                .HasColumnType("text");
 
                             b1.Property<string>("Street")
                                 .IsRequired()
@@ -220,13 +219,11 @@ namespace Ambev.DeveloperEvaluation.ORM.Migrations
                                     b2.Property<Guid>("AddressUserId")
                                         .HasColumnType("uuid");
 
-                                    b2.Property<string>("Lat")
-                                        .IsRequired()
-                                        .HasColumnType("text");
+                                    b2.Property<double>("Lat")
+                                        .HasColumnType("double precision");
 
-                                    b2.Property<string>("Long")
-                                        .IsRequired()
-                                        .HasColumnType("text");
+                                    b2.Property<double>("Long")
+                                        .HasColumnType("double precision");
 
                                     b2.HasKey("AddressUserId");
 
@@ -284,8 +281,7 @@ namespace Ambev.DeveloperEvaluation.ORM.Migrations
                     b.Navigation("Address")
                         .IsRequired();
 
-                    b.Navigation("Name")
-                        .IsRequired();
+                    b.Navigation("Name");
                 });
 
             modelBuilder.Entity("Ambev.DeveloperEvaluation.Domain.Entities.Carts.Cart", b =>

@@ -1,8 +1,8 @@
 ﻿namespace Ambev.DeveloperEvaluation.Common.Primitives
 {
-    public readonly record struct Phone(string Value)
+    public record struct Phone(string Value)
     {
-        public override string ToString()
+        public override readonly string ToString()
         {
             if (Value.Length == 11)
             {

@@ -5,9 +5,26 @@ namespace Ambev.DeveloperEvaluation.Domain.Entities.Users;
 [Owned]
 public class Address
 {
-    public string City { get; set; } = string.Empty;
-    public Geolocation Geolocation { get; set; } = new();
-    public int Number { get; set; }
-    public string Street { get; set; } = string.Empty;
-    public ZipCode ZipCode { get; set; } = new();
+    public Address(string city, Geolocation geolocation, string number, string street, ZipCode zipCode)
+    {
+        City = city;
+        Geolocation = geolocation;
+        Number = number;
+        Street = street;
+        ZipCode = zipCode;
+    }
+
+    protected Address()
+    { }
+
+    public string City { get; private set; }
+    public Geolocation Geolocation { get; private set; }
+    public string Number { get; private set; }
+    public string Street { get; private set; }
+    public ZipCode ZipCode { get; private set; }
+
+    public override string ToString()
+    {
+        return $"{Street}, {Number}, {City} - {ZipCode} | {Geolocation}";
+    }
 }

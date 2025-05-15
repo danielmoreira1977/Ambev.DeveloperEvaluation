@@ -5,6 +5,6 @@
         public static CartId New() => new(Guid.NewGuid());
         public static CartId Empty() => new(Guid.Empty);
 
-        public override string ToString() => Value.ToString();
+        public override readonly string ToString() => Value.ToString();
     }
 }

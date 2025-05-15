@@ -15,8 +15,21 @@ public class User : AggregateRoot<UserId>, IUser
     /// Used by Ef core.
     /// </summary>
     public User()
+    { }
+
+    public User(Address address, Email email, Name name, Password password, Phone phone, UserRole role, Username username)
     {
+        Id = UserId.New();
         CreatedAt = DateTime.UtcNow;
+        Address = address;
+        Email = email;
+        Name = name;
+        Password = password;
+        Phone = phone;
+        Role = role;
+        Username = username;
+
+        Activate();
     }
 
     public Address Address { get; init; }
@@ -32,7 +45,7 @@ public class User : AggregateRoot<UserId>, IUser
     /// </summary>
     public Email Email { get; init; }
 
-    public Name Name { get; init; }
+    public Name? Name { get; init; }
 
     /// <summary>
     /// Gets the hashed password for authentication. Password must meet security requirements:
@@ -55,7 +68,7 @@ public class User : AggregateRoot<UserId>, IUser
     /// Gets the user's current status. Indicates whether the user is active, inactive, or blocked
     /// in the system.
     /// </summary>
-    public UserStatus Status { get; set; }
+    public UserStatus? Status { get; set; }
 
     /// <summary>
     /// Gets the date and time of the last update to the user's information.

@@ -4,11 +4,11 @@ namespace Ambev.DeveloperEvaluation.Domain.Entities.Products
 {
     public interface IProduct
     {
-        string Category { get; set; }
-        string Description { get; set; }
-        string Image { get; set; }
-        Price Price { get; set; }
-        Rating Rating { get; set; }
-        string Title { get; set; }
+        string? Category { get; }
+        string? Description { get; }
+        string? Image { get; }
+        Price Price { get; }
+        Rating? Rating { get; }
+        string? Title { get; }
     }
 }
