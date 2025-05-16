@@ -1,4 +1,5 @@
-﻿using System.Linq.Dynamic.Core;
+﻿using Ambev.DeveloperEvaluation.Common.Primitives;
+using System.Linq.Dynamic.Core;
 using System.Reflection;
 using System.Text.RegularExpressions;
 
@@ -50,9 +51,10 @@ public static class IQueryableExtensions
             return query;
         }
 
+        var parametersToRemove = new[] { "_page", "_size", "_order" };
         var validParameteres =
             parameteres
-                .Where(kv => !kv.Key.StartsWith("_"))
+                .Where(kv => !parametersToRemove.Contains(kv.Key))
                 .ToDictionary(kv => kv.Key, kv => kv.Value);
 
         foreach (var parameter in validParameteres)
@@ -65,9 +67,18 @@ public static class IQueryableExtensions
                 continue;
             }
 
-            var validPropertyName = Capitalize(propertyName);
+            var isMin = propertyName.StartsWith("_min");
+            var isMax = propertyName.StartsWith("_max");
+
+            var tempPropertyName =
+                isMin || isMax
+                    ? propertyName.Replace("_min", "").Replace("_max", "").Trim()
+                    : propertyName;
+
+            var validPropertyName = Capitalize(tempPropertyName);
 
             var propertyInfo = typeof(T).GetProperty(validPropertyName, BindingFlags.Public | BindingFlags.Instance);
+
             if (propertyInfo == null)
             {
                 continue;
@@ -84,11 +95,11 @@ public static class IQueryableExtensions
 
             if (parameterType == typeof(string))
             {
-                if (propertyValue.StartsWith("*"))
+                if (propertyValue.StartsWith('*'))
                 {
                     query = query.Where($"{propertyName}.ToLower().EndsWith(@0)", propertyValue.Replace("*", ""));
                 }
-                else if (propertyValue.EndsWith("*"))
+                else if (propertyValue.EndsWith('*'))
                 {
                     query = query.Where($"{propertyName}.ToLower().StartsWith(@0)", propertyValue.Replace("*", ""));
                 }
@@ -101,7 +112,44 @@ public static class IQueryableExtensions
             {
                 if (int.TryParse(propertyValue, out var intValue))
                 {
-                    query = query.Where($"{propertyName} == @0", intValue);
+                    if (isMin)
+                    {
+                        query = query.Where($"{propertyName} >= @0", intValue);
+                    }
+                    else if (isMax)
+                    {
+                        query = query.Where($"{propertyName} <= @0", intValue);
+                    }
+                    else
+                    {
+                        query = query.Where($"{propertyName} == @0", intValue);
+                    }
+                }
+            }
+            else if (parameterType == typeof(Price))
+            {
+                try
+                {
+                    if (decimal.TryParse(propertyValue, out var decimalValue))
+                    {
+                        if (isMin)
+                        {
+                            query = query.Where($"{validPropertyName} >= @0", decimalValue);
+                        }
+                        else if (isMax)
+                        {
+                            query = query.Where($"{validPropertyName} <= @0", decimalValue);
+                        }
+                        else
+                        {
+                            query = query.Where($"{validPropertyName} == @0", decimalValue);
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    var error = ex.ToString();
+                    throw;
                 }
             }
         }
@@ -112,7 +160,9 @@ public static class IQueryableExtensions
     private static string Capitalize(string input)
     {
         if (string.IsNullOrEmpty(input))
+        {
             return input;
+        }
 
         return char.ToUpper(input[0]) + input.Substring(1);
     }

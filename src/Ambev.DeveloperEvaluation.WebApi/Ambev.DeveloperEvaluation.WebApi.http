@@ -12,7 +12,8 @@
 @filter2 = title=Fantástico Aço Salgadinhos
 @filter3 = title=fan*
 @filter4 = title=*bacon
-
+@min = 1800
+@max = 3000
 ###
 // Authentication
 GET {{Ambev.DeveloperEvaluation.WebApi_HostAddress}}/auth/generate-test-token
@@ -30,8 +31,8 @@ GET {{Ambev.DeveloperEvaluation.WebApi_HostAddress}}/products?_page={{page}}&_si
 GET {{Ambev.DeveloperEvaluation.WebApi_HostAddress}}/products?_page={{page}}&_size={{size}}&_order={{order1}}
 
 ###
-//Products with pagination and OrderBy and filter
-GET {{Ambev.DeveloperEvaluation.WebApi_HostAddress}}/products?_page={{page}}&_size={{size}}&_order={{order1}}&{{filter4}}
+//Products with pagination and OrderBy and filter plus MIN and MAX price
+GET {{Ambev.DeveloperEvaluation.WebApi_HostAddress}}/products?_page={{page}}&_size={{size}}&_order={{order1}}&{{filter4}}&_minprice={{min}}&_maxprice={{max}}
 
 ###
 
