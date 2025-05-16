@@ -1,15 +1,34 @@
-﻿using System;
-using Microsoft.EntityFrameworkCore.Migrations;
+﻿using Microsoft.EntityFrameworkCore.Migrations;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 #nullable disable
 
 namespace Ambev.DeveloperEvaluation.ORM.Migrations
 {
-    /// <inheritdoc />
+    /// <inheritdoc/>
     public partial class InitialCreate : Migration
     {
-        /// <inheritdoc />
+        /// <inheritdoc/>
+        protected override void Down(MigrationBuilder migrationBuilder)
+        {
+            migrationBuilder.DropTable(
+                name: "CartProducts",
+                schema: "DevTest");
+
+            migrationBuilder.DropTable(
+                name: "Users",
+                schema: "DevTest");
+
+            migrationBuilder.DropTable(
+                name: "Cart",
+                schema: "DevTest");
+
+            migrationBuilder.DropTable(
+                name: "Products",
+                schema: "DevTest");
+        }
+
+        /// <inheritdoc/>
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.EnsureSchema(
@@ -119,26 +138,6 @@ namespace Ambev.DeveloperEvaluation.ORM.Migrations
                 schema: "DevTest",
                 table: "CartProducts",
                 column: "ProductId");
-        }
-
-        /// <inheritdoc />
-        protected override void Down(MigrationBuilder migrationBuilder)
-        {
-            migrationBuilder.DropTable(
-                name: "CartProducts",
-                schema: "DevTest");
-
-            migrationBuilder.DropTable(
-                name: "Users",
-                schema: "DevTest");
-
-            migrationBuilder.DropTable(
-                name: "Cart",
-                schema: "DevTest");
-
-            migrationBuilder.DropTable(
-                name: "Products",
-                schema: "DevTest");
         }
     }
 }

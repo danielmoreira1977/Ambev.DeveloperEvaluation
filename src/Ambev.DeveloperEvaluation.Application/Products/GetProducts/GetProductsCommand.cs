@@ -1,4 +1,3 @@
-using Ambev.DeveloperEvaluation.Application.Products.Dtos;
 using Ambev.DeveloperEvaluation.Common.HttpResults;
 using MediatR;
 

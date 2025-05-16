@@ -1,6 +1,4 @@
-﻿using Ambev.DeveloperEvaluation.Common.HttpResults;
-
-//namespace Ambev.DeveloperEvaluation.Application.Products.Dtos
+﻿//namespace Ambev.DeveloperEvaluation.Application.Products.Dtos
 //{
 //    public class ProductsDto : PaginatedList<ProductDto>
 //    {
