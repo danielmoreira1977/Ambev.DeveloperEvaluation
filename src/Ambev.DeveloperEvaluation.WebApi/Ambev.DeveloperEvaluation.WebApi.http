@@ -1,5 +1,37 @@
 ﻿@Ambev.DeveloperEvaluation.WebApi_HostAddress = https://localhost:7057
 
-GET {{Ambev.DeveloperEvaluation.WebApi_HostAddress}}/authentication/generate-test-token
+//For users
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiIxMDAiLCJ1bmlxdWVfbmFtZSI6InVzZXJAZW1haWwuY29tIiwicm9sZSI6IkRhbmllbCBNb3JlaXJhIiwibmJmIjoxNzQ3MzE3Njk0LCJleHAiOjE3NDczNDY0OTQsImlhdCI6MTc0NzMxNzY5NH0.KdHSwZuCwmA4E7qdq9QKoNQmkb7ca64NMGddA_ARIJc 
+@userID = 100
+//For products
+@page = 10
+@size = 5
+@order1 = title  
+@order2 = price desc, title asc
+@filter1 = category=Kitchen
+@filter2 = title=Fantástico Aço Salgadinhos
+@filter3 = title=fan*
+@filter4 = title=*bacon
 
 ###
+// Authentication
+GET {{Ambev.DeveloperEvaluation.WebApi_HostAddress}}/auth/generate-test-token
+### -----------------------------------------------------------------------------
+GET {{Ambev.DeveloperEvaluation.WebApi_HostAddress}}/users/{{userID}}
+Authorization: bearer {{token}}
+###
+
+//Products with pagination
+GET {{Ambev.DeveloperEvaluation.WebApi_HostAddress}}/products?_page={{page}}&_size={{size}}
+
+###
+
+//Products with pagination and OrderBy
+GET {{Ambev.DeveloperEvaluation.WebApi_HostAddress}}/products?_page={{page}}&_size={{size}}&_order={{order1}}
+
+###
+//Products with pagination and OrderBy and filter
+GET {{Ambev.DeveloperEvaluation.WebApi_HostAddress}}/products?_page={{page}}&_size={{size}}&_order={{order1}}&{{filter4}}
+
+###
+

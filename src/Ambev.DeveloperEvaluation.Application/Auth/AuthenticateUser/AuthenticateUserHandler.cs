@@ -43,17 +43,7 @@ namespace Ambev.DeveloperEvaluation.Application.Auth.AuthenticateUser
 
             var token = _jwtTokenGenerator.GenerateToken(user.Id.Value, user.Username.Value, user.Role.Name);
 
-            return Result<AuthenticateUserResult>.Success(
-                new AuthenticateUserResult
-                (
-                     user.Id.Value,
-                     user.Email.Value,
-                     user.Name.ToString(),
-                     user.Phone.Value,
-                     user.Role.ToString(),
-                     token
-                )
-            );
+            return Result<AuthenticateUserResult>.Success(new AuthenticateUserResult(token));
         }
 
         private async Task<User?> GetByEmailAsync(string email, CancellationToken cancellationToken)
@@ -66,7 +56,9 @@ namespace Ambev.DeveloperEvaluation.Application.Auth.AuthenticateUser
                               Status = u.Status,
                               Username = u.Username,
                               Role = u.Role
-                          }).FirstOrDefaultAsync(cancellationToken);
+                          })
+                          .AsNoTracking()
+                          .FirstOrDefaultAsync(cancellationToken);
         }
     }
 }

@@ -13,8 +13,6 @@ public static class AuthenticationEndpoints
 
     public static void MapAuthEndpoints(this IEndpointRouteBuilder app)
     {
-        app.MapGet("/authentication", () => "Hello from auth!");
-
         /// <summary>
         /// Gera um token JWT de acesso e um refresh token para testes.
         /// </summary>

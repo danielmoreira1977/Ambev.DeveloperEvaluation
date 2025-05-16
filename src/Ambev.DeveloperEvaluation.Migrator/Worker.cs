@@ -16,7 +16,7 @@ public class Worker(
     IHostApplicationLifetime hostApplicationLifetime) : BackgroundService
 {
     public const string ActivitySourceName = "Migrations";
-    private static readonly bool mustExecute = true;
+    private static readonly bool mustExecute = false;
 
     private static readonly ActivitySource s_activitySource = new(ActivitySourceName);
 
