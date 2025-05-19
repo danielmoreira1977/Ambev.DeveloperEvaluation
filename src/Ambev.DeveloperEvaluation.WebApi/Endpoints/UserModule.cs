@@ -1,8 +1,14 @@
 ﻿using Ambev.DeveloperEvaluation.Application.Auth.AuthenticateUser;
+using Ambev.DeveloperEvaluation.Application.Users.CreateUser;
 using Ambev.DeveloperEvaluation.Application.Users.GetUser;
 using Ambev.DeveloperEvaluation.Common.HttpResults;
+using Ambev.DeveloperEvaluation.Common.Primitives;
+using Ambev.DeveloperEvaluation.Domain.Entities.Users;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using OpenTelemetry.Trace;
+using System.Data;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace Ambev.DeveloperEvaluation.WebApi.Endpoints;
 
@@ -54,7 +60,46 @@ public static class UserEndpoints
         .Produces<Result<AuthenticateUserResult>>(StatusCodes.Status500InternalServerError)
         .WithOpenApi();
 
-        app.MapPost("/users", () => "Hello from users!");
+        app.MapPost("/users",
+            async (
+                CreateUserRequest request,
+                [FromServices] IMediator mediator,
+                CancellationToken cancellationToken
+            ) =>
+            {
+                var command = new CreateUserCommand
+                (
+                    request.City,
+                    request.Email,
+                    request.Firstname,
+                    request.Lastname,
+                    request.Number,
+                    request.Password,
+                    request.Phone,
+                    request.Role,
+                    request.Status,
+                    request.Street,
+                    request.Username,
+                    request.ZipCode,
+                    request.Latitude,
+                    request.Longitude
+                );
+
+                var result = await mediator.Send(command, cancellationToken);
+
+                return result.Match(
+                    success => Results.Ok(result),
+                    error => Results.BadRequest(error)
+                );
+            }
+        )
+        .RequireAuthorization()
+        .WithName("Create a new user")
+        .WithTags(UsersTag)
+        .Produces<Result<AuthenticateUserResult>>(StatusCodes.Status200OK)
+        .Produces<Result<AuthenticateUserResult>>(StatusCodes.Status400BadRequest)
+        .Produces<Result<AuthenticateUserResult>>(StatusCodes.Status500InternalServerError)
+        .WithOpenApi();
 
         app.MapPut("/users/{id}", () => "Hello from users!");
 

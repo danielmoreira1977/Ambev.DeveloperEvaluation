@@ -21,6 +21,24 @@ namespace Ambev.DeveloperEvaluation.Domain.Entities.Users
 
         void Activate();
 
+        User Create
+        (
+            string city,
+            string email,
+            string firstname,
+            string lastname,
+            string number,
+            string password,
+            string phone,
+            string role,
+            string status,
+            string street,
+            string username,
+            string zipCode,
+            double latitude,
+            double longitude
+        );
+
         void Deactivate();
 
         void Suspend();

@@ -88,6 +88,50 @@ public class User : AggregateRoot<UserId>, IUser
         UpdatedAt = DateTime.UtcNow;
     }
 
+    public User Create
+            (
+                string city,
+                string email,
+                string firstname,
+                string lastname,
+                string number,
+                string password,
+                string phone,
+                string role,
+                string status,
+                string street,
+                string username,
+                string zipCode,
+                double latitude,
+                double longitude
+            )
+    {
+        var address = new Address(
+            city,
+            new Geolocation(latitude, longitude),
+            number,
+            street,
+            new ZipCode(zipCode)
+         );
+
+        var userEmail = new Email(email);
+        var userFullname = new Name(firstname, lastname);
+
+        var user = new User
+            (
+                address,
+                userEmail,
+                userFullname,
+                new Password(password),
+                new Phone(phone),
+                UserRole.FromName(role),
+                new Username(username)
+            );
+
+        user.AddDomainEvent(new UserCreatedEvent(userEmail.Value, userFullname.ToString()));
+        return user;
+    }
+
     /// <summary>
     /// Deactivates the user account. Changes the user's status to Inactive.
     /// </summary>

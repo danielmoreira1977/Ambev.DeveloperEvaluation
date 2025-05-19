@@ -84,13 +84,6 @@ public static class IQueryableExtensions
                 continue;
             }
 
-            //_min int Date
-            //_max int Date
-
-            //field=value
-            //title=value*
-            //title=*value
-
             var parameterType = propertyInfo.PropertyType;
 
             if (parameterType == typeof(string))

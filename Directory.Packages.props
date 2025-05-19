@@ -1,84 +1,88 @@
 <Project>
-  <PropertyGroup>
-    <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
-    <NET_Version>9.0.4</NET_Version>
-    <Aspire_Version>9.2.1</Aspire_Version>
-  </PropertyGroup>
-  <ItemGroup>
-    <PackageVersion Include="Ardalis.SmartEnum" Version="8.2.0" />
-    <PackageVersion Include="Ardalis.SmartEnum.EFCore" Version="8.2.0" />
-    <PackageVersion Include="BCrypt.Net-Next" Version="4.0.3" />
-    <PackageVersion Include="Bogus" Version="35.6.3" />
-    <PackageVersion Include="FluentAssertions" Version="8.2.0" />
-    <PackageVersion Include="FluentValidation" Version="12.0.0" />
-    <PackageVersion Include="MediatR" Version="12.5.0" />
-    <PackageVersion Include="Microsoft.Build.Tasks.Core" Version="17.14.8" />
-    <PackageVersion Include="Microsoft.CodeAnalysis.Common" Version="4.13.0" />
-    <PackageVersion Include="Microsoft.CodeAnalysis.CSharp.Workspaces" Version="4.13.0" />
-    <PackageVersion Include="Microsoft.CodeAnalysis.Workspaces.MSBuild" Version="4.13.0" />
-    <PackageVersion Include="Microsoft.Extensions.Http.Resilience" Version="9.1.0" />
-    <PackageVersion Include="Microsoft.NET.Test.Sdk" Version="17.13.0" />
-    <PackageVersion Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.21.2" />
-    <PackageVersion Include="NSubstitute" Version="5.3.0" />
-    <PackageVersion Include="OpenTelemetry.Exporter.OpenTelemetryProtocol" Version="1.12.0" />
-    <PackageVersion Include="OpenTelemetry.Extensions.Hosting" Version="1.12.0" />
-    <PackageVersion Include="OpenTelemetry.Instrumentation.AspNetCore" Version="1.12.0" />
-    <PackageVersion Include="OpenTelemetry.Instrumentation.Http" Version="1.12.0" />
-    <PackageVersion Include="OpenTelemetry.Instrumentation.Runtime" Version="1.12.0" />
-    <PackageVersion Include="Roslynator.Testing.CSharp.Xunit" Version="4.13.1" />
-    <PackageVersion Include="Serilog.AspNetCore" Version="9.0.0" />
-    <PackageVersion Include="Serilog.Enrichers.Environment" Version="3.0.1" />
-    <PackageVersion Include="Serilog.Enrichers.ExceptionData" Version="1.0.0" />
-    <PackageVersion Include="Serilog.Exceptions" Version="8.4.0" />
-    <PackageVersion Include="Serilog.Exceptions.EntityFrameworkCore" Version="8.4.0" />
-    <PackageVersion Include="Serilog.Expressions" Version="5.0.0" />
-    <PackageVersion Include="Serilog.Sinks.Console" Version="6.0.0" />
-    <PackageVersion Include="Swashbuckle.AspNetCore" Version="8.1.1" />
-    <PackageVersion Include="System.Formats.Asn1" Version="9.0.4" />
-    <PackageVersion Include="System.Linq.Dynamic.Core" Version="1.6.3" />
-    <PackageVersion Include="xunit" Version="2.9.3" />
-    <PackageVersion Include="coverlet.collector" Version="6.0.4">
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-      <PrivateAssets>all</PrivateAssets>
-    </PackageVersion>
-    <PackageVersion Include="coverlet.msbuild" Version="6.0.4">
-      <PrivateAssets>all</PrivateAssets>
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-    </PackageVersion>
-    <PackageVersion Include="Microsoft.EntityFrameworkCore.Design" Version="9.0.4">
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-      <PrivateAssets>all</PrivateAssets>
-    </PackageVersion>
-    <PackageVersion Include="Roslynator.Analyzers" Version="4.13.1">
-      <PrivateAssets>all</PrivateAssets>
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-    </PackageVersion>
-    <PackageVersion Include="xunit.runner.visualstudio" Version="3.1.0">
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-      <PrivateAssets>all</PrivateAssets>
-    </PackageVersion>
-    <!-- NET_Version -->
-    <PackageVersion Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="$(NET_Version)" />
-    <PackageVersion Include="Microsoft.AspNetCore.OpenApi" Version="$(NET_Version)" />
-    <PackageVersion Include="Microsoft.EntityFrameworkCore" Version="$(NET_Version)" />
-    <PackageVersion Include="Microsoft.EntityFrameworkCore.Relational" Version="$(NET_Version)" />
-    <PackageVersion Include="Microsoft.Extensions.Caching.Memory" Version="$(NET_Version)" />
-    <PackageVersion Include="Microsoft.Extensions.Configuration.UserSecrets" Version="$(NET_Version)" />
-    <PackageVersion Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="$(NET_Version)" />
-    <PackageVersion Include="Microsoft.Extensions.Diagnostics.HealthChecks" Version="$(NET_Version)" />
-    <PackageVersion Include="Microsoft.Extensions.Hosting" Version="$(NET_Version)" />
-    <PackageVersion Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="$(NET_Version)" />
-    <PackageVersion Include="Microsoft.EntityFrameworkCore.Tools" Version="$(NET_Version)">
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-      <PrivateAssets>all</PrivateAssets>
-    </PackageVersion>
-    <!-- Aspire_Version -->
-    <PackageVersion Include="Aspire.Hosting" Version="$(Aspire_Version)" />
-    <PackageVersion Include="Aspire.Hosting.AppHost" Version="$(Aspire_Version)" />
-    <PackageVersion Include="Aspire.Hosting.PostgreSQL" Version="$(Aspire_Version)" />
-    <PackageVersion Include="Aspire.Hosting.RabbitMQ" Version="$(Aspire_Version)" />
-    <PackageVersion Include="Aspire.Hosting.Testing" Version="$(Aspire_Version)" />
-    <PackageVersion Include="Aspire.Npgsql.EntityFrameworkCore.PostgreSQL" Version="$(Aspire_Version)" />
-    <PackageVersion Include="Microsoft.Extensions.ServiceDiscovery" Version="$(Aspire_Version)" />
-  </ItemGroup>
+	<PropertyGroup>
+		<ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
+		<NET_Version>9.0.4</NET_Version>
+		<Aspire_Version>9.2.1</Aspire_Version>
+	</PropertyGroup>
+	<ItemGroup>
+		<PackageVersion Include="Ardalis.SmartEnum" Version="8.2.0" />
+		<PackageVersion Include="Ardalis.SmartEnum.EFCore" Version="8.2.0" />
+		<PackageVersion Include="BCrypt.Net-Next" Version="4.0.3" />
+		<PackageVersion Include="Bogus" Version="35.6.3" />
+		<PackageVersion Include="FluentAssertions" Version="8.2.0" />
+		<PackageVersion Include="FluentValidation" Version="12.0.0" />
+		<PackageVersion Include="MediatR" Version="12.5.0" />
+		<PackageVersion Include="Microsoft.Build.Tasks.Core" Version="17.14.8" />
+		<PackageVersion Include="Microsoft.CodeAnalysis.Common" Version="4.13.0" />
+		<PackageVersion Include="Microsoft.CodeAnalysis.CSharp.Workspaces" Version="4.13.0" />
+		<PackageVersion Include="Microsoft.CodeAnalysis.Workspaces.MSBuild" Version="4.13.0" />
+		<PackageVersion Include="Microsoft.Extensions.Http.Resilience" Version="9.1.0" />
+		<PackageVersion Include="Microsoft.Extensions.Options" Version="9.0.4" />
+		<PackageVersion Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="9.0.4" />
+		<PackageVersion Include="Microsoft.NET.Test.Sdk" Version="17.13.0" />
+		<PackageVersion Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.21.2" />
+		<PackageVersion Include="NSubstitute" Version="5.3.0" />
+		<PackageVersion Include="OpenTelemetry.Exporter.OpenTelemetryProtocol" Version="1.12.0" />
+		<PackageVersion Include="OpenTelemetry.Extensions.Hosting" Version="1.12.0" />
+		<PackageVersion Include="OpenTelemetry.Instrumentation.AspNetCore" Version="1.12.0" />
+		<PackageVersion Include="OpenTelemetry.Instrumentation.Http" Version="1.12.0" />
+		<PackageVersion Include="OpenTelemetry.Instrumentation.Runtime" Version="1.12.0" />
+		<PackageVersion Include="Polly.Core" Version="8.5.2" />
+		<PackageVersion Include="Roslynator.Testing.CSharp.Xunit" Version="4.13.1" />
+		<PackageVersion Include="Serilog.AspNetCore" Version="9.0.0" />
+		<PackageVersion Include="Serilog.Enrichers.Environment" Version="3.0.1" />
+		<PackageVersion Include="Serilog.Enrichers.ExceptionData" Version="1.0.0" />
+		<PackageVersion Include="Serilog.Exceptions" Version="8.4.0" />
+		<PackageVersion Include="Serilog.Exceptions.EntityFrameworkCore" Version="8.4.0" />
+		<PackageVersion Include="Serilog.Expressions" Version="5.0.0" />
+		<PackageVersion Include="Serilog.Sinks.Console" Version="6.0.0" />
+		<PackageVersion Include="Swashbuckle.AspNetCore" Version="8.1.1" />
+		<PackageVersion Include="System.Formats.Asn1" Version="9.0.4" />
+		<PackageVersion Include="System.Linq.Dynamic.Core" Version="1.6.3" />
+		<PackageVersion Include="xunit" Version="2.9.3" />
+		<PackageVersion Include="coverlet.collector" Version="6.0.4">
+			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+			<PrivateAssets>all</PrivateAssets>
+		</PackageVersion>
+		<PackageVersion Include="coverlet.msbuild" Version="6.0.4">
+			<PrivateAssets>all</PrivateAssets>
+			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+		</PackageVersion>
+		<PackageVersion Include="Microsoft.EntityFrameworkCore.Design" Version="9.0.4">
+			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+			<PrivateAssets>all</PrivateAssets>
+		</PackageVersion>
+		<PackageVersion Include="Roslynator.Analyzers" Version="4.13.1">
+			<PrivateAssets>all</PrivateAssets>
+			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+		</PackageVersion>
+		<PackageVersion Include="xunit.runner.visualstudio" Version="3.1.0">
+			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+			<PrivateAssets>all</PrivateAssets>
+		</PackageVersion>
+		<!-- NET_Version -->
+		<PackageVersion Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="$(NET_Version)" />
+		<PackageVersion Include="Microsoft.AspNetCore.OpenApi" Version="$(NET_Version)" />
+		<PackageVersion Include="Microsoft.EntityFrameworkCore" Version="$(NET_Version)" />
+		<PackageVersion Include="Microsoft.EntityFrameworkCore.Relational" Version="$(NET_Version)" />
+		<PackageVersion Include="Microsoft.Extensions.Caching.Memory" Version="$(NET_Version)" />
+		<PackageVersion Include="Microsoft.Extensions.Configuration.UserSecrets" Version="$(NET_Version)" />
+		<PackageVersion Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="$(NET_Version)" />
+		<PackageVersion Include="Microsoft.Extensions.Diagnostics.HealthChecks" Version="$(NET_Version)" />
+		<PackageVersion Include="Microsoft.Extensions.Hosting" Version="$(NET_Version)" />
+		<PackageVersion Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="$(NET_Version)" />
+		<PackageVersion Include="Microsoft.EntityFrameworkCore.Tools" Version="$(NET_Version)">
+			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+			<PrivateAssets>all</PrivateAssets>
+		</PackageVersion>
+		<!-- Aspire_Version -->
+		<PackageVersion Include="Aspire.Hosting" Version="$(Aspire_Version)" />
+		<PackageVersion Include="Aspire.Hosting.AppHost" Version="$(Aspire_Version)" />
+		<PackageVersion Include="Aspire.Hosting.PostgreSQL" Version="$(Aspire_Version)" />
+		<PackageVersion Include="Aspire.Hosting.RabbitMQ" Version="$(Aspire_Version)" />
+		<PackageVersion Include="Aspire.RabbitMQ.Client" Version="$(Aspire_Version)" />
+		<PackageVersion Include="Aspire.Hosting.Testing" Version="$(Aspire_Version)" />
+		<PackageVersion Include="Aspire.Npgsql.EntityFrameworkCore.PostgreSQL" Version="$(Aspire_Version)" />
+		<PackageVersion Include="Microsoft.Extensions.ServiceDiscovery" Version="$(Aspire_Version)" />
+	</ItemGroup>
 </Project>
