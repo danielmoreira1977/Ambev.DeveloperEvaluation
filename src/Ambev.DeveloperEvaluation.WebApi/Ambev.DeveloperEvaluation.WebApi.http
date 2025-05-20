@@ -20,7 +20,17 @@ GET {{Ambev.DeveloperEvaluation.WebApi_HostAddress}}/auth/generate-test-token
 ### -----------------------------------------------------------------------------
 GET {{Ambev.DeveloperEvaluation.WebApi_HostAddress}}/users/{{userID}}
 Authorization: bearer {{token}}
+
 ###
+Post {{Ambev.DeveloperEvaluation.WebApi_HostAddress}}/users
+Content-Type: application/json
+Authorization: bearer {{token}}
+{
+  "name": "Alice",
+  "email": "alice@example.com",
+  "password": "P@ssw0rd!"
+}
+### -----------------------------------------------------------------------------
 
 //Products with pagination
 GET {{Ambev.DeveloperEvaluation.WebApi_HostAddress}}/products?_page={{page}}&_size={{size}}

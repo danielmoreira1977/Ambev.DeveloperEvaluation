@@ -1,6 +1,25 @@
 # Developer Evaluation Project
 
-`READ CAREFULLY`
+
+`DEV NOTES - PLEASE READ CAREFULLY`
+
+
+
+Improvements
+ - Update to .NET 9
+ - Implement Central Package Management for Nuget [https://devblogs.microsoft.com/dotnet/introducing-central-package-management/]
+ - Implement .NET ASPIRE 
+ - Refactory of Entities
+	- void primitive obssesion
+	- Use Strong Type Ids
+ - Remove AutoMapper (It is becoming commercial and should be replaced - MediatR should also be replaced - but it was out of the scope of this test due to time constraints)	
+ - Implement Unit of Work on DbContext
+ - Include AggregationRoot do Domain (as recomended on DDD)
+ - Add UserSecrets (to avoid Sensitive Data from AppSetting)
+ - Using SmartEnums
+ - Implement IOptions<T> pattern for JwtSettings
+ - Return API errors based on RFC 9457 document
+
 
 ## Instructions
 **The test below will have up to 7 calendar days to be delivered from the date of receipt of this manual.**
