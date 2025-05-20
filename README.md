@@ -1,11 +1,21 @@
 # Developer Evaluation Project
 
+---
+In addition to simply solving the implementation proposed in the challenge — which we can consider trivial for a Senior Developer (especially since it was well-documented and partially implemented) — I chose to take a different approach.
+
+I’m aware that unconventional approaches can sometimes frustrate reviewers, but I took the risk to showcase other skills within the .NET platform.
+
+Strongly Typed IDs, addressing Primitive Obsession, using Records, moving the project toward a more object-oriented design, creating an automated "migrator," and exploring different versions of entities with various creation patterns and constructors, among other things.
+
+I decided to experiment a bit beyond what was expected. However, time is the biggest challenge in this kind of test — writing well-commented, thoroughly tested code that reflects one’s knowledge and experience demands more time than what is typically available for a simple evaluation.
+
+Nevertheless, I’m grateful for the opportunity. It was fun to participate, and I wish all the best to everyone involved.
+
+Daniel Moreira
+---
 
 `DEV NOTES - PLEASE READ CAREFULLY`
-
-
-
-Improvements
+## Improvements
  - Update to .NET 9
  - Implement Central Package Management for Nuget [https://devblogs.microsoft.com/dotnet/introducing-central-package-management/]
  - Implement .NET ASPIRE 
@@ -20,6 +30,39 @@ Improvements
  - Implement IOptions<T> pattern for JwtSettings
  - Return API errors based on RFC 9457 document
 
+## Notes
+
+* Generic repositories were removed, and the `DbContext` is now consumed directly. This is simply a technical preference of mine, as it facilitates consistency with the Unit of Work pattern. I find it easier not to abstract something that is already abstracted by EF Core, among other reasons. However, there's nothing wrong with using the repository approach.
+
+* Some minor refactorings were made, such as moving `IUser` from `Common` to `Domain`, simply to better align with the refactoring model proposed by this developer. In a different context, these files could remain in their original locations, and the code would be refactored to accommodate them appropriately.
+
+* Some method signatures and interfaces (such as `IJwtTokenGenerator`) were adjusted to avoid unnecessary coupling between the refactored layers.
+
+* Some comments were omitted purely due to time constraints — their importance is clear, and this developer is fully in favor of their mandatory use.
+
+* The `[BaseController]` was separated to avoid mixing logged-in user properties with common return objects (Single Responsibility Principle).
+
+* There are generally two types of `[Validator]` for the same request: one acting at the API level and another at the Application level, both validating the same fields. I chose to validate only at the Application level to avoid having two points of change for the same rule. However, I also understand the benefit of validating at the API level using the "Fail Fast" concept with guard clauses.
+
+* When using offsets in queries, results may be skipped or omitted.
+
+* Regarding filter rules, the code in `IQueryableExtensions` should be extended to support all \[value objects] and \[records] — this was omitted due to time constraints, but I made it work using `Price` as an example.
+
+* The RabbitMQ implementation used is the one present in the eShop project.
+
+## How to run
+- Run EF Migrations
+-- Copy FULL path of [Ambev.DeveloperEvaluation.API] and use it on [startup-project]
+-- Open a terminal on [Ambev.DeveloperEvaluation.ORM] folder and execute the command:
+dotnet ef migrations add InitialCreate --startup-project [FULL_PATH_API] --context DefaultContext
+
+the command should be like:
+dotnet ef migrations add InitialCreate --startup-project C:\Users\User\Desktop\DESAFIO\template\backend\src\Ambev.DeveloperEvaluation.WebApi\Ambev.DeveloperEvaluation.WebApi.csproj  --context DefaultContext	
+
+- RUN on Visual Studio
+	The HTTP file [...\src\Ambev.DeveloperEvaluation.WebApi\Ambev.DeveloperEvaluation.WebApi.http] contains the tests 
+		
+---
 
 ## Instructions
 **The test below will have up to 7 calendar days to be delivered from the date of receipt of this manual.**
