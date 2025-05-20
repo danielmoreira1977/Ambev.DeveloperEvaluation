@@ -17,21 +17,15 @@ public class User : AggregateRoot<UserId>, IUser
     public User()
     { }
 
-    public User(Address address, Email email, Name name, Password password, Phone phone, UserRole role, Username username)
+    public User(UserId id, UserStatus status, Username username, UserRole role)
     {
-        CreatedAt = DateTime.UtcNow;
-        Address = address;
-        Email = email;
-        Name = name;
-        Password = password;
-        Phone = phone;
-        Role = role;
-        Username = username;
-
-        Activate();
+        Id = id;
+        SetStatus(status);
+        SetUsername(username);
+        SetRole(role);
     }
 
-    public Address Address { get; init; }
+    public Address Address { get; private set; }
 
     /// <summary>
     /// Gets the date and time when the user was created.
@@ -42,32 +36,32 @@ public class User : AggregateRoot<UserId>, IUser
     /// Gets the user's email address. Must be a valid email format and is used as a unique
     /// identifier for authentication.
     /// </summary>
-    public Email Email { get; init; }
+    public Email Email { get; private set; }
 
-    public Name? Name { get; init; }
+    public Name Name { get; private set; }
 
     /// <summary>
     /// Gets the hashed password for authentication. Password must meet security requirements:
     /// minimum 8 characters, at least one uppercase letter, one lowercase letter, one number, and
     /// one special character.
     /// </summary>
-    public Password Password { get; init; }
+    public Password Password { get; private set; }
 
     /// <summary>
     /// Gets the user's phone number. Must be a valid phone number format following the pattern (XX) XXXXX-XXXX.
     /// </summary>
-    public Phone Phone { get; init; }
+    public Phone Phone { get; private set; }
 
     /// <summary>
     /// Gets the user's role in the system. Determines the user's permissions and access levels.
     /// </summary>
-    public UserRole Role { get; init; }
+    public UserRole Role { get; private set; }
 
     /// <summary>
     /// Gets the user's current status. Indicates whether the user is active, inactive, or blocked
     /// in the system.
     /// </summary>
-    public UserStatus? Status { get; set; }
+    public UserStatus Status { get; protected set; }
 
     /// <summary>
     /// Gets the date and time of the last update to the user's information.
@@ -77,7 +71,7 @@ public class User : AggregateRoot<UserId>, IUser
     /// <summary>
     /// Gets the user's full name. Must not be null or empty and should contain both first and last names.
     /// </summary>
-    public Username Username { get; init; }
+    public Username Username { get; private set; }
 
     /// <summary>
     /// Activates the user account. Changes the user's status to Active.
@@ -117,16 +111,18 @@ public class User : AggregateRoot<UserId>, IUser
         var userEmail = new Email(email);
         var userFullname = new Name(firstname, lastname);
 
-        var user = new User
-            (
-                address,
-                userEmail,
-                userFullname,
-                new Password(password),
-                new Phone(phone),
-                UserRole.FromName(role),
-                new Username(username)
-            );
+        var user = new User();
+
+        user.SetAddress(address);
+        user.SetEmail(userEmail);
+        user.SetName(userFullname);
+        user.SetPassword(new Password(password));
+        user.SetPhone(new Phone(phone));
+        user.SetRole(UserRole.FromName(role));
+        user.SetStatus(UserStatus.FromName(status));
+        user.SetUsername(new Username(username));
+
+        Activate();
 
         user.AddDomainEvent(new UserCreatedEvent(userEmail.Value, userFullname.ToString()));
         return user;
@@ -140,6 +136,22 @@ public class User : AggregateRoot<UserId>, IUser
         Status = UserStatus.Inactive;
         UpdatedAt = DateTime.UtcNow;
     }
+
+    public void SetAddress(Address address) => Address = address;
+
+    public void SetEmail(Email email) => Email = email;
+
+    public void SetName(Name name) => Name = name;
+
+    public void SetPassword(Password password) => Password = password;
+
+    public void SetPhone(Phone email) => Phone = email;
+
+    public void SetRole(UserRole role) => Role = role;
+
+    public void SetStatus(UserStatus status) => Status = status;
+
+    public void SetUsername(Username username) => Username = username;
 
     /// <summary>
     /// Blocks the user account. Changes the user's status to Blocked.

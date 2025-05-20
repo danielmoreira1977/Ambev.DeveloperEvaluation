@@ -17,11 +17,11 @@ public class Address
     protected Address()
     { }
 
-    public string City { get; private set; }
-    public Geolocation Geolocation { get; private set; }
-    public string Number { get; private set; }
-    public string Street { get; private set; }
-    public ZipCode ZipCode { get; private set; }
+    public string? City { get; init; }
+    public Geolocation? Geolocation { get; init; }
+    public string? Number { get; init; }
+    public string? Street { get; init; }
+    public ZipCode? ZipCode { get; init; }
 
     public override string ToString()
     {

@@ -16,7 +16,7 @@ public class Worker(
     IHostApplicationLifetime hostApplicationLifetime) : BackgroundService
 {
     public const string ActivitySourceName = "Migrations";
-    private static readonly bool mustExecute = false;
+    private static readonly bool mustExecute = true;
 
     private static readonly ActivitySource s_activitySource = new(ActivitySourceName);
 
@@ -98,6 +98,7 @@ public class Worker(
         var faker = new Faker("pt_BR");
 
         UserRole[] userRoles = UserRole.List.ToArray();
+        UserStatus[] userStatus = UserStatus.List.ToArray();
 
         for (int i = 0; i < 10_000; i++)
         {
@@ -110,18 +111,19 @@ public class Worker(
             var password = new Password(faker.Internet.Password());
             var phone = new Phone(faker.Phone.PhoneNumber());
             var role = faker.PickRandom(userRoles);
+            var status = faker.PickRandom(userStatus);
             var username = new Username(faker.Internet.UserName());
 
-            var user = new User
-                (
-                    address,
-                    email,
-                    name,
-                    password,
-                    phone,
-                    role,
-                    username
-                );
+            var user = new User();
+
+            user.SetAddress(address);
+            user.SetEmail(email);
+            user.SetName(name);
+            user.SetPassword(password);
+            user.SetPhone(phone);
+            user.SetRole(role);
+            user.SetStatus(status);
+            user.SetUsername(username);
 
             users.Add(user);
         }

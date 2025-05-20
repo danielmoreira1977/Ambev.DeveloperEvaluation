@@ -28,20 +28,26 @@ namespace Ambev.DeveloperEvaluation.Application.Auth.AuthenticateUser
         {
             var user = await GetByEmailAsync(request.Email, cancellationToken);
 
-            if (user == null || !_passwordHasher.VerifyPassword(request.Password, user.Password.Value))
+            if (user is null)
             {
                 _logger.LogError("Invalid credentials for user with email: {Email}", request.Email);
                 return Result<AuthenticateUserResult>.Failure(Error.UnauthorizedAccessCredentialsError);
             }
 
+            if (!_passwordHasher.VerifyPassword(request.Password, user?.Password.Value))
+            {
+                _logger.LogError("Invalid password for user with email: {Email}", request.Email);
+                return Result<AuthenticateUserResult>.Failure(Error.UnauthorizedAccessCredentialsError);
+            }
+
             var activeUserSpec = new ActiveUserSpecification();
-            if (!activeUserSpec.IsSatisfiedBy(user))
+            if (!activeUserSpec.IsSatisfiedBy(user!))
             {
                 _logger.LogError("Inactive user attempted to authenticate: {Email}", request.Email);
                 return Result<AuthenticateUserResult>.Failure(Error.UnauthorizedAccessUserInactiveError);
             }
 
-            var token = _jwtTokenGenerator.GenerateToken(user.Id.Value, user.Username.Value, user.Role.Name);
+            var token = _jwtTokenGenerator.GenerateToken(user!.Id.Value, user.Username.Value, user.Role.Name);
 
             return Result<AuthenticateUserResult>.Success(new AuthenticateUserResult(token));
         }
@@ -49,14 +55,8 @@ namespace Ambev.DeveloperEvaluation.Application.Auth.AuthenticateUser
         private async Task<User?> GetByEmailAsync(string email, CancellationToken cancellationToken)
         {
             return await (from u in _defaultContext.Users
-                          where u.Email.Value == email
-                          select new User
-                          {
-                              Id = u.Id,
-                              Status = u.Status,
-                              Username = u.Username,
-                              Role = u.Role
-                          })
+                          where u.Email == new Common.Primitives.Email(email)
+                          select new User(u.Id, u.Status, u.Username, u.Role))
                           .AsNoTracking()
                           .FirstOrDefaultAsync(cancellationToken);
         }

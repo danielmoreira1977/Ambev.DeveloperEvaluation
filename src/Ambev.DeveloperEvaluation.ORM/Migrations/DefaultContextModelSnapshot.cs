@@ -137,7 +137,7 @@ namespace Ambev.DeveloperEvaluation.ORM.Migrations
                     b.Property<int>("Role")
                         .HasColumnType("integer");
 
-                    b.Property<int?>("Status")
+                    b.Property<int>("Status")
                         .HasColumnType("integer");
 
                     b.Property<DateTime?>("UpdatedAt")
@@ -204,15 +204,12 @@ namespace Ambev.DeveloperEvaluation.ORM.Migrations
                                 .HasColumnType("integer");
 
                             b1.Property<string>("City")
-                                .IsRequired()
                                 .HasColumnType("text");
 
                             b1.Property<string>("Number")
-                                .IsRequired()
                                 .HasColumnType("text");
 
                             b1.Property<string>("Street")
-                                .IsRequired()
                                 .HasColumnType("text");
 
                             b1.HasKey("UserId");
@@ -258,11 +255,9 @@ namespace Ambev.DeveloperEvaluation.ORM.Migrations
                                         .HasForeignKey("AddressUserId");
                                 });
 
-                            b1.Navigation("Geolocation")
-                                .IsRequired();
+                            b1.Navigation("Geolocation");
 
-                            b1.Navigation("ZipCode")
-                                .IsRequired();
+                            b1.Navigation("ZipCode");
                         });
 
                     b.OwnsOne("Ambev.DeveloperEvaluation.Domain.Entities.Users.Name", "Name", b1 =>
@@ -289,7 +284,8 @@ namespace Ambev.DeveloperEvaluation.ORM.Migrations
                     b.Navigation("Address")
                         .IsRequired();
 
-                    b.Navigation("Name");
+                    b.Navigation("Name")
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Ambev.DeveloperEvaluation.Domain.Entities.Carts.Cart", b =>

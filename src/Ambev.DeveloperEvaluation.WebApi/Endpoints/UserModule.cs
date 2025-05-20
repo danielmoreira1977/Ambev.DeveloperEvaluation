@@ -2,13 +2,8 @@
 using Ambev.DeveloperEvaluation.Application.Users.CreateUser;
 using Ambev.DeveloperEvaluation.Application.Users.GetUser;
 using Ambev.DeveloperEvaluation.Common.HttpResults;
-using Ambev.DeveloperEvaluation.Common.Primitives;
-using Ambev.DeveloperEvaluation.Domain.Entities.Users;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using OpenTelemetry.Trace;
-using System.Data;
-using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace Ambev.DeveloperEvaluation.WebApi.Endpoints;
 

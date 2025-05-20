@@ -93,7 +93,7 @@ public sealed class RabbitMQEventBus(
 
             _propagator.Inject(new PropagationContext(contextToInject, Baggage.Current), properties, InjectTraceContextIntoBasicProperties);
 
-            SetActivityContext(activity, routingKey, "publish");
+            SetActivityContext(activity!, routingKey, "publish");
 
             if (logger.IsEnabled(LogLevel.Trace))
             {
@@ -113,7 +113,7 @@ public sealed class RabbitMQEventBus(
             }
             catch (Exception ex)
             {
-                activity.SetExceptionTags(ex);
+                activity!.SetExceptionTags(ex);
 
                 throw;
             }
@@ -231,7 +231,7 @@ public sealed class RabbitMQEventBus(
     [UnconditionalSuppressMessage("Trimming", "IL2026:RequiresUnreferencedCode",
         Justification = "The 'JsonSerializer.IsReflectionEnabledByDefault' feature switch, which is set to false by default for trimmed .NET apps, ensures the JsonSerializer doesn't use Reflection.")]
     [UnconditionalSuppressMessage("AOT", "IL3050:RequiresDynamicCode", Justification = "See above.")]
-    private IntegrationEvent DeserializeMessage(string message, Type eventType)
+    private IntegrationEvent? DeserializeMessage(string message, Type eventType)
     {
         return JsonSerializer.Deserialize(message, eventType, _subscriptionInfo.JsonSerializerOptions) as IntegrationEvent;
     }

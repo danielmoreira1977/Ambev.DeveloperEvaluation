@@ -1,10 +1,5 @@
 ﻿namespace Ambev.DeveloperEvaluation.Common.Primitives;
 
-//public record struct Price(decimal Value)
-//{
-//    public static Price Empty() => new(0m);
-//}
-
 public readonly record struct Price(decimal Value)
     : IComparable<Price>, IComparable<decimal>, IEquatable<Price>
 {

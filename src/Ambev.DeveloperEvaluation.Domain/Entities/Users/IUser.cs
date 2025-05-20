@@ -11,12 +11,18 @@ namespace Ambev.DeveloperEvaluation.Domain.Entities.Users
     {
         Address Address { get; }
         Email Email { get; }
-        Name? Name { get; }
+        Name Name { get; }
+
         Password Password { get; }
+
         Phone Phone { get; }
-        UserRole? Role { get; }
-        UserStatus? Status { get; }
+
+        UserRole Role { get; }
+
+        UserStatus Status { get; }
+
         DateTime? UpdatedAt { get; }
+
         Username Username { get; }
 
         void Activate();
@@ -40,6 +46,22 @@ namespace Ambev.DeveloperEvaluation.Domain.Entities.Users
         );
 
         void Deactivate();
+
+        void SetAddress(Address address);
+
+        void SetEmail(Email email);
+
+        void SetName(Name name);
+
+        void SetPassword(Password password);
+
+        void SetPhone(Phone email);
+
+        void SetRole(UserRole role);
+
+        void SetStatus(UserStatus status);
+
+        void SetUsername(Username username);
 
         void Suspend();
 
